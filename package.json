@@ -1,13 +1,13 @@
 {
   "name": "students-viz",
   "version": "1.0.0",
-  "description": "Visualization about students growth in Germany",
+  "description": "Visualization about student growth in Germany",
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
     "build": "gulp --production"
   },
-  "repository": "https://github.com/eliashaeussler/students-viz",
+  "repository": "https://github.com/eliashaeussler/student-growth",
   "author": "Elias Häußler <mail@elias-haeussler.de>",
   "license": "MIT",
   "dependencies": {
