@@ -58,6 +58,12 @@ The Development mode allows you to see changes on project files immediately in y
 for changes.
 
 
+## Resources
+
+* [dataBundesLander.json](https://gist.github.com/oscar6echo/4423770#file-databundeslander-json) by [oscar6echo](https://gist.github.com/oscar6echo)
+* [21311-0005.csv](https://www-genesis.destatis.de/genesis/online?sequenz=tabelleDownload&selectionname=21311-0005&regionalschluessel=&format=csv) (modified) by the [Federal Statistical Office of Germany](https://www.destatis.de/EN/Homepage.html) 
+
+
 ## License
 
 [MIT License](LICENSE.md)
