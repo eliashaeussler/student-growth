@@ -3,14 +3,13 @@
  */
 
 // Variables
-@import './modules/variables';
+@import 'modules/variables';
 
 // Fonts
-@import './partials/fonts';
+@import 'partials/fonts';
 
 // Partials
-@import './partials/general';
-@import './partials/header';
-@import './partials/main';
-@import './partials/visualization';
-@import './partials/footer';
+@import 'partials/general';
+@import 'partials/grid';
+@import 'partials/page';
+@import 'partials/visualization';

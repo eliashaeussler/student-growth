@@ -19,31 +19,31 @@ const GEO_FILE = "data/de-states.json";
  * CSS selector for fullscreen element
  * @type {string}
  */
-const FULLSCREEN_SELECTOR = "#fullscreen";
+const FULLSCREEN_SELECTOR = ".fullscreen";
 
 /**
  * CSS selector for data info element
  * @type {string}
  */
-const DATA_INFO_SELECTOR = "#data-info";
+const DATA_INFO_SELECTOR = ".page-header__meta";
 
 /**
  * CSS selector for visualization controls element
  * @type {string}
  */
-const CONTROLS_SELECTOR = "#viz-control";
+const CONTROLS_SELECTOR = ".visualization__controls";
 
 /**
  * CSS selector for visualization map element
  * @type {string}
  */
-const MAP_SELECTOR = "#viz-map";
+const MAP_SELECTOR = ".visualization__map";
 
 /**
  * CSS selector for visualization chart element
  * @type {string}
  */
-const CHART_SELECTOR = "#viz-chart";
+const CHART_SELECTOR = ".visualization__chart";
 
 /**
  * Geometrical center of Germany

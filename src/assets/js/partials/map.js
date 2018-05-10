@@ -137,9 +137,9 @@ export class Map
 
     // Tooltip
     if (!this._tooltip) {
-      this._tooltip = d3.select("body")
+      this._tooltip = d3.select(".map")
         .append("div")
-        .attr("class", "tooltip")
+        .attr("class", "map__tooltip")
         .style("visibility", "hidden");
     }
   }
@@ -201,7 +201,10 @@ export class Map
           .data(json.features)
           .enter()
           .append("path")
-          .attr("d", this._path)
+          .attrs({
+            "class": "map__path",
+            "d": this._path
+          })
 
           // Listener for hovering over the current path
           .on("mouseover", d => {

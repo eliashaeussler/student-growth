@@ -223,7 +223,7 @@ export class Chart
         .selectAll("text")
         .style("text-anchor", "end")
         .attrs({
-          "class": d => d === this._key_y ? "active" : "",
+          "class": d => "chart__text" + (d === this._key_y ? " chart__text--active" : ""),
           "dx": "-1.4em",
           "dy": ".3em",
           "transform": "rotate(-70)"
@@ -231,24 +231,26 @@ export class Chart
 
       // Render y axis
       this._yAxis.scale(this._y);
-      this._gY.call(this._yAxis);
+      this._gY.call(this._yAxis)
+        .selectAll("text")
+        .attr("class", "chart__text");
 
       // Add line to chart
       this._g.selectAll("path")
         .transition()
         .attrs({
-          "class": "chart-line",
+          "class": "chart__line",
           "d": this._line(_d)
         });
 
       // Add grid lines
-      d3.selectAll("g.y g.tick")
-        .selectAll("line.grid-line")
+      d3.selectAll("g.chart__axis--y g.tick")
+        .selectAll(".chart__line--grid")
         .data([{}])
         .enter()
         .append("line")
         .attrs({
-          "class": "grid-line",
+          "class": "chart__line--grid",
           "x1": 0,
           "y1": 0,
           "x2": this._width,
@@ -280,7 +282,7 @@ export class Chart
           "cx": d => d.x,
           "cy": d => d.y,
           "r": 4.5,
-          "class": d => "dot" + (d.active ? " active" : "")
+          "class": d => "chart__dot" + (d.active ? " chart__dot--active" : "")
         });
     });
   }
@@ -306,7 +308,7 @@ export class Chart
     if (this._gX == null) {
       this._gX = this._svg.append("g")
         .attrs({
-          "class": "x axis",
+          "class": "chart__axis chart__axis--x",
           "transform": "translate(" + this._margin.left + ", " + (this._height + this._margin.top) + ")"
         });
     }
@@ -314,7 +316,7 @@ export class Chart
     if (this._gY == null) {
       this._gY = this._svg.append("g")
         .attrs({
-          "class": "y axis",
+          "class": "chart__axis chart__axis--y",
           "transform": "translate(" + this._margin.left + ", " + this._margin.top + ")"
         });
     }
@@ -331,7 +333,7 @@ export class Chart
         .attrs({
           "x": this._margin.left + this._width / 2,
           "y": 15,
-          "class": "title"
+          "class": "chart__title"
         });
     }
 
@@ -341,7 +343,7 @@ export class Chart
         .attrs({
           "x": this._margin.left + this._width / 2,
           "y": 40,
-          "class": "subtitle"
+          "class": "chart__subtitle"
         });
     }
 

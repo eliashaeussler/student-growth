@@ -1,0 +1,60 @@
+/*!
+ * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
+ */
+
+.page {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: {
+    top: 2em;
+    bottom: 2em;
+  }
+  margin: {
+    top: 2em;
+    bottom: 2em;
+  }
+
+  &-wrapper {
+    padding: 2em;
+  }
+
+  &-header {
+    margin-bottom: 2em;
+
+    h1 {
+      font-weight: bold;
+      font-size: 1.6em;
+      margin-bottom: 1em;
+    }
+
+    div.error {
+      background: #ffd3b6;
+      padding: 1em;
+      border-radius: 3px;
+    }
+
+    p,
+    ol {
+      line-height: 1.7;
+
+      &:not(:first-child) {
+        margin-top: 1em;
+      }
+    }
+
+    ol {
+      list-style: decimal;
+      padding: 1em;
+
+      li {
+        padding-left: 5px;
+      }
+    }
+  }
+
+  &-footer {
+    margin-top: 2em;
+    color: #666;
+    font-size: 0.8em;
+  }
+}

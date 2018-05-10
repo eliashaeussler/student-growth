@@ -2,94 +2,133 @@
  * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
  */
 
-main {
-  svg {
-    path {
-      &:not(.chart-line) {
-        stroke: #aaa;
-        cursor: crosshair;
+.visualization {
+  &__controls,
+  &__map,
+  &__chart {
+    margin: {
+      top: 1em;
+      bottom: 1em;
+    }
 
-        &:hover {
-          fill-opacity: .7;
-        }
-      }
+    &:first-child {
+      margin-top: 0;
+    }
 
-      &.chart-line {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  &__controls {
+    text-align: center;
+  }
+
+  &__chart {
+    svg {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility $transition, opacity $transition;
+    }
+  }
+
+  &__chart {
+    .chart {
+      &__line {
         fill: none;
         stroke: #ff8b94;
         stroke-width: 2px;
         stroke-linejoin: round;
         stroke-linecap: round;
-      }
-    }
 
-    .axis {
-      path,
-      line {
-        fill: none;
-        stroke: #999;
-        shape-rendering: crispEdges;
+        &--grid {
+          stroke-opacity: 0.5;
+          shape-rendering: crispEdges;
+        }
       }
 
-      text {
+      &__axis {
+        path,
+        line {
+          shape-rendering: crispEdges;
+        }
+
+        path,
+        line {
+          fill: none;
+          stroke: #999;
+        }
+      }
+
+      &__text {
         fill: #999;
-        font-size: .9em;
+        font-size: 1em;
 
-        &.active {
+        &--active {
           fill: #ff8b94;
         }
       }
 
-      .grid-line {
-        stroke-opacity: .5;
-        shape-rendering: crispEdges;
+      &__title,
+      &__subtitle {
+        text-anchor: middle;
       }
-    }
 
-    .dot {
-      fill: #f9f9f9;
-      stroke: #ff8b94;
-      stroke-width: 2px;
-      z-index: 10;
-
-      &.active {
-        fill: #ff8b94;
+      &__title {
+        font-size: 1.1em;
+        fill: #999;
       }
-    }
 
-    .title {
-      font-size: 1.1em;
-      fill: #999;
-      text-anchor: middle;
-    }
+      &__subtitle {
+        font-size: 0.8em;
+        fill: #aaa;
+      }
 
-    .subtitle {
-      font-size: .8em;
-      fill: #aaa;
-      text-anchor: middle;
+      &__dot {
+        fill: #f9f9f9;
+        stroke: #ff8b94;
+        stroke-width: 2px;
+        z-index: 10;
+
+        &--active {
+          fill: #ff8b94;
+        }
+      }
     }
   }
 
-  #viz-chart svg {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility $transition, opacity $transition;
-  }
-}
+  &__map {
+    .map {
+      &__tooltip {
+        position: absolute;
+        z-index: 99;
+        background: rgba(17, 17, 17,.6);
+        border-radius: 3px;
+        color: #eee;
+        font-size: 0.7em;
+        text-align: center;
+        padding: {
+          top: 0.7em;
+          right: 1em;
+          bottom: 0.7em;
+          left: 1em;
+        }
+        transform: translate(-50%, -100%);
 
-.tooltip {
-  position: absolute;
-  z-index: 99;
-  background: rgba(17,17,17,.6);
-  border-radius: 3px;
-  color: #eee;
-  font-size: .7em;
-  text-align: center;
-  padding: .7em 1em;
-  transform: translate(-50%, -100%);
+        div {
+          font-size: 1.3em;
+          margin-bottom: 0.5em;
+        }
+      }
 
-  div {
-    font-size: 1.3em;
-    margin-bottom: .5em;
+      &__path {
+        stroke: #aaa;
+        cursor: crosshair;
+
+        &:hover {
+          fill-opacity: 0.7;
+        }
+      }
+    }
   }
 }

@@ -4,51 +4,37 @@
 		<title>Visualization</title>
 		<meta charset="utf-8" />
 		<meta name="author" content="Elias Häußler" />
+    <meta name="description" content="Visualization about students growth in Germany" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 
 	<body>
-		<div id="wrapper">
+		<div class="page-wrapper">
 
-			<!-- HEADER -->
-			<header>
+			<header class="page-header">
+				<section class="page-header__meta"></section>
+			</header> <!-- eof: .page-header -->
 
-				<section id="data-info"></section> <!-- #data-info -->
-
-			</header>
-			<!-- HEADER END -->
-
-
-
-			<!-- MAIN -->
-			<main>
-				<section>
-
-					<article id="viz-control" style="width: auto;"></article> <!-- #viz-control -->
-
-					<div class="row">
-						<article id="viz-map" class="cell"></article>  <!-- #viz-map -->
-						<article id="viz-chart" class="cell"></article>  <!-- #viz-chart -->
+			<main class="page">
+				<section class="page__section page__section--visualization visualization">
+					<div class="visualization__controls" style="width: auto;"></div>
+					<div class="grid">
+						<div class="visualization__map map grid__cell"></div>
+						<div class="visualization__chart chart grid__cell"></div>
 					</div>
-					
-				</section>
-			</main>
-			<!-- MAIN END -->
+				</section> <!-- eof: .visualization -->
+			</main> <!-- eof: .page -->
 
+			<footer class="page-footer">
+        <div class="page-footer__copyright">
+				  &copy; 2018 <a class="link" href="https://www.elias-haeussler.de" target="_blank">Elias Häußler</a>.
+        </div>
+      </footer> <!-- eof: .page-footer -->
 
+		</div> <!-- .page-wrapper -->
 
-			<!-- FOOTER -->
-			<footer>
-				&copy; 2018 <a href="https://www.elias-haeussler.de" target="_blank">Elias Häußler</a>.
-			</footer>
-			<!-- FOOTER END -->
+		<div class="fullscreen"></div>
 
-		</div> <!-- #wrapper -->
-
-		<div id="fullscreen"></div>
-
-		<!-- JS_INCLUDE -->
 		<script src="assets/js/main.js"></script>
-		<!-- JS_INCLUDE END -->
 	</body>
 </html>
