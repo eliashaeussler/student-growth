@@ -56,3 +56,8 @@ yarn run start
 
 The Development mode allows you to see changes on project files immediately in your browser since BrowserSync is watching
 for changes.
+
+
+## License
+
+[MIT License](LICENSE.md)
