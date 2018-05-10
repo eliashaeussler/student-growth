@@ -3,11 +3,14 @@
  */
 
 /**
- * Map visualization.
+ * Map visualization
  * Contains all relevant information and functions in relation to the map visualization with the D3 framework.
  */
 export class Map
 {
+  /**
+   * Initialize Map Visualization
+   */
   constructor()
   {
     /**
@@ -256,8 +259,6 @@ export class Map
     });
   }
 
-
-
   /**
    * Define settings and render map
    * Creates the svg element if it does not exist, defines the map projection settings and renders the map with the D3 framework.
@@ -286,61 +287,61 @@ export class Map
 
   /**
    * Get or set data
-   * @param d
+   * @param value
    * @returns {*}
    */
-  data(d)
+  data(value)
   {
     if (!arguments.length) return this._data;
-    this._data = d;
+    this._data = value;
     return this;
   }
 
   /**
    * Get or set geo data
-   * @param g
+   * @param value
    * @returns {*}
    */
-  geo(g)
+  geo(value)
   {
     if (!arguments.length) return this._geo;
-    this._geo = g;
+    this._geo = value;
     return this;
   }
 
   /**
    * Get or set x key
-   * @param k
+   * @param value
    * @returns {*}
    */
-  key_x(k)
+  key_x(value)
   {
     if (!arguments.length) return this._key_x;
-    this._key_x = k;
+    this._key_x = value;
     return this;
   }
 
   /**
    * Get or set y key
-   * @param k
+   * @param value
    * @returns {*}
    */
-  key_y(k)
+  key_y(value)
   {
     if (!arguments.length) return this._key_y;
-    this._key_y = k;
+    this._key_y = value;
     return this;
   }
 
   /**
    * Get or set chart
-   * @param c
+   * @param value
    * @returns {*}
    */
-  chart(c)
+  chart(value)
   {
     if (!arguments.length) return this._chart;
-    this._chart = c;
+    this._chart = value;
     return this;
   }
 }

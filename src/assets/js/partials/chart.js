@@ -8,6 +8,9 @@
  */
 export class Chart
 {
+  /**
+   * Initialize Visualization Chart
+   */
   constructor()
   {
     /**
@@ -355,37 +358,37 @@ export class Chart
 
   /**
    * Get or set data
-   * @param d
+   * @param value
    * @returns {*}
    */
-  data(d)
+  data(value)
   {
     if (!arguments.length) return this._data;
-    this._data = d;
+    this._data = value;
     return this;
   }
 
   /**
    * Get or set x key
-   * @param k
+   * @param value
    * @returns {*}
    */
-  key_x(k)
+  key_x(value)
   {
     if (!arguments.length) return this._key_x;
-    this._key_x = k;
+    this._key_x = value;
     return this;
   }
 
   /**
    * Get or set y key
-   * @param k
+   * @param value
    * @returns {*}
    */
-  key_y(k)
+  key_y(value)
   {
     if (!arguments.length) return this._key_y;
-    this._key_y = k;
+    this._key_y = value;
     return this;
   }
 

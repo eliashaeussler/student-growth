@@ -4,10 +4,13 @@
 
 let { Spinner } = require('spin.js');
 
+/**
+ * Data Provider and Visualization Initializing
+ */
 export class Data
 {
   /**
-   *
+   * Initialize visualization
    * @param map {Map}
    * @param chart {Chart}
    */

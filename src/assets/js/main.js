@@ -3,10 +3,8 @@
  */
 
 // Load dependencies
-let $ = require('jquery');
-window.$ = $;
-
-let d3 = Object.assign({},
+window.$ = require('jquery');
+window.d3 = Object.assign({},
   require('d3-array'),
   require('d3-axis'),
   require('d3-fetch'),
@@ -18,11 +16,9 @@ let d3 = Object.assign({},
   require('d3-svg'),
   require('d3-transition')
 );
-window.d3 = d3;
 
 // Load variables
-let Global = require('./modules/variables');
-window.Global = Global;
+window.Global = require('./modules/variables');
 
 // Load classes
 let { Data } = require('./partials/data');
