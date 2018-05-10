@@ -1,3 +1,7 @@
+![license](https://img.shields.io/github/license/eliashaeussler/student-growth.svg)
+[![release](https://img.shields.io/github/release/eliashaeussler/student-growth.svg)](https://github.com/eliashaeussler/student-growth/releases/)
+
+
 # Student growth
 
 A JavaScript-based project demonstrating the student growth in Germany in the past 20 years. It uses data from the
