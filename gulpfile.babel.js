@@ -12,7 +12,6 @@ import rimraf from 'rimraf';
 import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
 import named from 'vinyl-named';
-import merge from 'merge-stream';
 
 
 
@@ -27,10 +26,6 @@ const SERVER = {
 // Define Paths
 const PATHS = {
   dist: "dist",
-  assets: [
-    "src/assets/**/*",
-    "!src/assets/{js,scss}/**/*"
-  ],
   data: "src/data/**/*",
   images: [
     "src/assets/img/**/*"
@@ -148,12 +143,8 @@ let pages = () =>
  */
 let copy = () =>
 {
-  let assets = gulp.src(PATHS.assets, { nodir: true })
-    .pipe(gulp.dest(PATHS.dist + '/assets'));
-  let data = gulp.src(PATHS.data, { nodir: true })
+  return gulp.src(PATHS.data, { nodir: true })
     .pipe(gulp.dest(PATHS.dist + '/data'));
-
-  return merge(assets, data);
 };
 
 /**
