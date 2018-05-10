@@ -37,7 +37,9 @@ const PATHS = {
   sass: {
     all: "src/assets/scss/**/*.scss",
     entry: "src/assets/scss/main.scss",
-    reset: "node_modules/reset-css"
+    modules: [
+      "node_modules/reset-css"
+    ]
   },
   pages: "src/**/*.html"
 };
@@ -73,7 +75,7 @@ let sass = () =>
     .pipe(named())
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      includePaths: [PATHS.sass.entry, PATHS.sass.reset]
+      includePaths: [PATHS.sass.entry, PATHS.sass.modules]
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer({ browsers: COMPATIBILITY }))
     .pipe($.if(PRODUCTION, $.cleanCss({
