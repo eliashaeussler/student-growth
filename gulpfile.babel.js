@@ -54,9 +54,6 @@ const COMPATIBILITY = [
 // Check for --production flag
 const PRODUCTION = !!(yargs.argv.production);
 
-// Check for --with-server flag
-const WITH_SERVER = !!(yargs.argv['with-server']);
-
 
 
 
@@ -197,7 +194,7 @@ let watch = () =>
 let build = gulp.series(clean, gulp.parallel(copy, lint, sass, javascript, pages));
 
 // Default Task
-gulp.task('default', !PRODUCTION || PRODUCTION && WITH_SERVER
+gulp.task('default', !PRODUCTION
   ? gulp.series(build, server, watch)
-  : gulp.series(build)
+  : gulp.series(build, server)
 );
