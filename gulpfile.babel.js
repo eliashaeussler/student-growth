@@ -182,7 +182,7 @@ let reload = done =>
  */
 let watch = () =>
 {
-  gulp.watch(PATHS.assets, gulp.series(copy, reload));
+  gulp.watch(PATHS.data, gulp.series(copy, reload));
   gulp.watch(PATHS.javascript.all, gulp.series(lint, javascript, reload));
   gulp.watch(PATHS.sass.all, gulp.series(sass, reload));
   gulp.watch(PATHS.pages, gulp.series(pages, reload));
