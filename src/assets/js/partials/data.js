@@ -136,11 +136,11 @@ export class Data
       </li>
       <li>
         Change to the root directory of this project:<br />
-        <code>cd /path/to/students-viz</code>
+        <code>cd /path/to/student-growth</code>
       </li>
       <li>
         Download the latest data set using Python:<br />
-        <code>python3 download.py</code>
+        <code>python3 bin/download.py</code>
       </li>
       <li>
         Click "Refresh" to start the visualization.
