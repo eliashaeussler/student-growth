@@ -22,11 +22,11 @@ def main():
 		info = getInformation(source['url'])
 
 	except urllib.error.URLError:
-		print(CRED + 'Error: There is probably no active internet connection.' + CEND)
+		print(CRED + "Error: There is probably no active internet connection." + CEND)
 		sys.exit(0)
 
 	# Print data information
-	print('Downloading: ' + CITALIC + info['title'] + CEND + ' by ' + CITALIC + info['author'] + CEND)
+	print("Downloading: " + CITALIC + info['title'] + CEND + " by " + CITALIC + info['author'] + CEND)
 
 	# Write contents of downloaded file
 	dl = download(info['data_url'], source['keys'], source['data_rows'])
@@ -36,10 +36,10 @@ def main():
 		saveInformation(info, dl['file'], dl['keys'])
 
 		# Print download result
-		print(CGREEN + 'Download successful: ' + dl['file'] + CEND)
+		print(CGREEN + "Download successful: " + SOURCE_DIR + "/" + dl['file'] + CEND)
 	else:
 		# Download not successful
-		print(CRED + 'Download failed.' + CEND)
+		print(CRED + "Download failed." + CEND)
 
 
 def getInformation(url):
@@ -60,13 +60,13 @@ def getInformation(url):
 	try:
 		data_url
 	except NameError:
-		print(CRED + 'Error: No CSV file found in the specified source.' + CEND)
+		print(CRED + "Error: No CSV file found in the specified source." + CEND)
 		sys.exit(0)
 
 	return {
-		'title': data['title'],
-		'author': data['author'],
-		'data_url': data_url
+		"title": data['title'],
+		"author": data['author'],
+		"data_url": data_url
 	}
 
 
@@ -88,9 +88,9 @@ def download(url, keys, data_rows):
 		keys_y.append([])
 	
 	# Read and write file contents
-	with open(file, 'w+') as outfile:
+	with open(file, "w+") as outfile:
 		# Initialize reader and writer
-		cr = csv.reader(codecs.iterdecode(res, 'ISO-8859-1'), delimiter=';')
+		cr = csv.reader(codecs.iterdecode(res, "ISO-8859-1"), delimiter=";")
 		cw = csv.writer(outfile)
 
 		# Get file contents
@@ -116,7 +116,7 @@ def download(url, keys, data_rows):
 				for j in range(len(keys_x[0])):
 					tk = keys_x[0][j]
 					for n in range(1, len(keys_x)):
-						tk = tk + ' ' + keys_x[n][j]
+						tk = tk + " " + keys_x[n][j]
 					keys_tmp.append(tk)
 
 				# Make list unique
@@ -125,7 +125,7 @@ def download(url, keys, data_rows):
 
 				# Format keys
 				for j, k in enumerate(keys_x):
-					keys_x[j] = ','.join(keys_x[j])
+					keys_x[j] = ",".join(keys_x[j])
 
 				# Write keys into csv file
 				cw.writerow(["state"] + ([None] * (len(keys['y'])-1)) + keys_tmp)
@@ -140,40 +140,40 @@ def download(url, keys, data_rows):
 
 	# Make keys unique
 	for i, k in enumerate(keys_y):
-		keys_y[i] = ','.join([d for j, d in enumerate(sorted(set(k)))])
+		keys_y[i] = ",".join([d for j, d in enumerate(sorted(set(k)))])
 
 	return {
-		'file': DATA_DIR + "/" + DATA_FILENAME,
-		'keys': {
-			'x': keys_x,
-			'y': keys_y
+		"file": DATA_DIR + "/" + DATA_FILENAME,
+		"keys": {
+			"x": keys_x,
+			"y": keys_y
 		}
 	}
 
 
 def saveInformation(info, file, keys):
 	# Get keys
-	nationality = keys['x'][0].split(',')
-	sex = keys['x'][1].split(',')
-	state = keys['y'][0].split(',')
-	semester = keys['y'][1].split(',')
+	nationality = keys['x'][0].split(",")
+	sex = keys['x'][1].split(",")
+	state = keys['y'][0].split(",")
+	semester = keys['y'][1].split(",")
 
 	# Define json contents
 	data = {
-		'title': info['title'],
-		'author': info['author'],
-		'url': info['data_url'],
-		'file': file,
-		'attributes': {
-			'nationality': nationality,
-			'sex': sex,
-			'state': state,
-			'semester': semester
+		"title": info['title'],
+		"author": info['author'],
+		"url": info['data_url'],
+		"file": file,
+		"attributes": {
+			"nationality": nationality,
+			"sex": sex,
+			"state": state,
+			"semester": semester
 		}
 	}
 
 	# Write data to json file
-	with open(SOURCE_DIR + "/" + DATA_DIR + "/" + INFO_FILENAME, 'w+', encoding='utf-8') as outfile:
+	with open(SOURCE_DIR + "/" + DATA_DIR + "/" + INFO_FILENAME, "w+", encoding="utf-8") as outfile:
 		json.dump(data, outfile)
 
 
@@ -189,16 +189,16 @@ def getSource():
 
 	# Check validity of data rows
 	if data_rows['last'] == 0:
-		print(CRED + 'Error: The last data row cannot be 0.' + CEND)
+		print(CRED + "Error: The last data row cannot be 0." + CEND)
 		sys.exit(0)
 	elif data_rows['last'] > 0 and data_rows['last'] < data_rows['first']:
-		print(CRED + 'Error: Please specify a valid number for the last data row.' + CEND)
+		print(CRED + "Error: Please specify a valid number for the last data row." + CEND)
 		sys.exit(0)
 
 	return {
-		'url': url,
-		'keys': keys,
-		'data_rows': data_rows
+		"url": url,
+		"keys": keys,
+		"data_rows": data_rows
 	}
 
 
