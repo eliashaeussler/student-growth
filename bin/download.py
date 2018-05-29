@@ -1,8 +1,20 @@
 #!/usr/bin/python
 import sys, os, csv, json, urllib.request, ssl, codecs
 
+CEND = '\033[0m'
+CITALIC = '\33[3m'
+CSELECTED = '\33[7m'
+CGREEN = '\33[32m'
+CRED = '\033[91m'
+
+SOURCE_DIR = "src"
+DATA_DIR = "data"
+DATA_FILENAME = "data.csv"
+INFO_FILENAME = "info.json"
+SOURCE_FILE = "data/source.json"
+
 def main():
-	# Get url
+	# Get source data
 	source = getSource()
 
 	# Get url information
@@ -10,24 +22,24 @@ def main():
 		info = getInformation(source['url'])
 
 	except urllib.error.URLError:
-		print('Fehler: Es besteht anscheinend keine Verbindung zum Internet.')
+		print(CRED + 'Error: There is probably no active internet connection.' + CEND)
 		sys.exit(0)
 
 	# Print data information
-	print('[0] Datensatz "' + info['title'] + '" von "' + info['author'] + '" wird heruntergeladen.')
+	print('Downloading: ' + CITALIC + info['title'] + CEND + ' by ' + CITALIC + info['author'] + CEND)
 
-	# Save file
-	dl = download(info['data_url'], source['keys'], source['data'])
+	# Write contents of downloaded file
+	dl = download(info['data_url'], source['keys'], source['data_rows'])
 
 	if dl != False:
 		# Save information in file
 		saveInformation(info, dl['file'], dl['keys'])
 
 		# Print download result
-		print('[1] Datensatz wurde erfolgreich heruntergeladen: ' + dl['file'])
+		print(CGREEN + 'Download successful: ' + dl['file'] + CEND)
 	else:
 		# Download not successful
-		print('[1] Download fehlgeschlagen.')
+		print(CRED + 'Download failed.' + CEND)
 
 
 def getInformation(url):
@@ -39,11 +51,17 @@ def getInformation(url):
 	data = json.loads(res.read())
 
 	# Get csv resource url
-	data_url = ""
 	for res in data['resources']:
 		if res['format'] == "CSV":
 			data_url = res['url']
 			break
+
+	# Show error message if no csv file has been found
+	try:
+		data_url
+	except NameError:
+		print(CRED + 'Error: No CSV file found in the specified source.' + CEND)
+		sys.exit(0)
 
 	return {
 		'title': data['title'],
@@ -52,30 +70,42 @@ def getInformation(url):
 	}
 
 
-def download(url, keys, data):
+def download(url, keys, data_rows):
 	# Create directory if not exists
-	path = "data"
+	path = SOURCE_DIR + "/" + DATA_DIR
 	if not os.path.exists(path):
 		os.makedirs(path)
 
 	# Open url
-	file = path + '/data.csv'
+	file = path + "/" + DATA_FILENAME
 	context = ssl._create_unverified_context()
 	res = urllib.request.urlopen(url, context=context)
 
-	# Set key lists
+	# Init lists which contain the keys
 	keys_x = []
 	keys_y = []
 	for i in keys['x']:
 		keys_y.append([])
 	
-	# Read file contents
-	with open(file, 'w+') as f:
+	# Read and write file contents
+	with open(file, 'w+') as outfile:
+		# Initialize reader and writer
 		cr = csv.reader(codecs.iterdecode(res, 'ISO-8859-1'), delimiter=';')
-		cw = csv.writer(f)
+		cw = csv.writer(outfile)
 
-		for i, row in enumerate(cr):
+		# Get file contents
+		contents = list(cr)
 
+		# Get row number which contains last data
+		if data_rows['last'] < 0:
+			last_row = len(contents) + data_rows['last']
+		elif data_rows['last'] > data_rows['first']:
+			last_row = data_rows['last']
+		else:
+			return False
+
+		# Read and write keys and data
+		for i, row in enumerate(contents):
 			# Read keys
 			if i in keys['y']:
 				keys_x.append([k for j, k in enumerate(row) if j not in keys['x']])
@@ -100,24 +130,20 @@ def download(url, keys, data):
 				# Write keys into csv file
 				cw.writerow(["state"] + ([None] * (len(keys['y'])-1)) + keys_tmp)
 
-
 			# Read data
-			if i >= data[0] and i <= data[1]:
+			if i >= data_rows['first'] and i <= last_row:
 				cw.writerow(row)
 
 				for j, k in enumerate(row):
 					if j in keys['x']:
 						keys_y[j].append(k)
 
-	# Close file
-	f.close()
-
 	# Make keys unique
 	for i, k in enumerate(keys_y):
 		keys_y[i] = ','.join([d for j, d in enumerate(sorted(set(k)))])
 
 	return {
-		'file': file,
+		'file': DATA_DIR + "/" + DATA_FILENAME,
 		'keys': {
 			'x': keys_x,
 			'y': keys_y
@@ -126,70 +152,54 @@ def download(url, keys, data):
 
 
 def saveInformation(info, file, keys):
-	# Format keys
-	keys_x = ';'.join([str(i) for i in keys['x']])
-	keys_y = ';'.join([str(i) for i in keys['y']])
+	# Get keys
+	nationality = keys['x'][0].split(',')
+	sex = keys['x'][1].split(',')
+	state = keys['y'][0].split(',')
+	semester = keys['y'][1].split(',')
 
-	# Open file
-	f = codecs.open('data/info', 'w+', 'utf-8')
+	# Define json contents
+	data = {
+		'title': info['title'],
+		'author': info['author'],
+		'url': info['data_url'],
+		'file': file,
+		'attributes': {
+			'nationality': nationality,
+			'sex': sex,
+			'state': state,
+			'semester': semester
+		}
+	}
 
-	# Write information into file
-	f.write('title: ' + info['title'] + '\n')
-	f.write('author: ' + info['author'] + '\n')
-	f.write('url: ' + info['data_url'] + '\n')
-	f.write('file: ' + file + '\n')
-	f.write('keys_x: ' + keys_x + '\n')
-	f.write('keys_y: ' + keys_y)
-
-	# Close file
-	f.close()
+	# Write data to json file
+	with open(SOURCE_DIR + "/" + DATA_DIR + "/" + INFO_FILENAME, 'w+', encoding='utf-8') as outfile:
+		json.dump(data, outfile)
 
 
 def getSource():
-	# Open source file
-	f = open('data/source', 'r')
+	# Read json source file
+	with open(SOURCE_FILE) as file:
+		contents = json.load(file)
 
 	# Read sources from file
-	url = f.readline()
-	keys = f.readline()
-	data = f.readline()
-	f.close()
+	url = contents['url']
+	keys = contents['keys']
+	data_rows = contents['data_rows']
 
-	# Replace unnecessary information
-	url = formatData(url, 'url')
-	keys = formatData(keys, 'keys')
-	data = formatData(data, 'data')
-
-	# Convert keys and data
-	keys = keys.split('|')
-	keys_x = keys[0].split(',')
-	keys_y = keys[1].split(',')
-	data = data.split(',')
-	for i,k in enumerate(keys_x):
-		keys_x[i] = int(k)
-	for i,k in enumerate(keys_y):
-		keys_y[i] = int(k)
-	for i,d in enumerate(data):
-		data[i] = int(d)
+	# Check validity of data rows
+	if data_rows['last'] == 0:
+		print(CRED + 'Error: The last data row cannot be 0.' + CEND)
+		sys.exit(0)
+	elif data_rows['last'] > 0 and data_rows['last'] < data_rows['first']:
+		print(CRED + 'Error: Please specify a valid number for the last data row.' + CEND)
+		sys.exit(0)
 
 	return {
 		'url': url,
-		'keys': {
-			'x': keys_x,
-			'y': keys_y
-		},
-		'data': data
+		'keys': keys,
+		'data_rows': data_rows
 	}
-
-
-def formatData(data, key):
-	data = data.replace(key + ':', '')
-	data = data.replace(' ', '')
-	data = data.replace('\n', '')
-	data = data.replace('\r', '')
-	data = data.replace('\t', '')
-
-	return data
 
 
 def unique(data):
