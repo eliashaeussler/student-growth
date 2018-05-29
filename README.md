@@ -10,6 +10,13 @@ A JavaScript-based project demonstrating the student growth in Germany in the pa
 The project is based on the [D3](https://github.com/d3/d3) library and developed with [Gulp](https://github.com/gulpjs/gulp).
 
 
+## Requirements
+
+* `yarn` or `npm` to install the required packages
+* [`gulp-cli`](https://github.com/gulpjs/gulp-cli) to build and run the project
+* [`python3`](https://www.python.org/) in case you want to download the latest data
+
+
 ## Installation
 
 For installation, clone the repository first.
@@ -36,8 +43,7 @@ In order to access the website which shows the visualization, you need to build 
 yarn run build
 ```
 
-You can alternatively use `npm run-script build` or `gulp --production` (you need to have
-[`gulp-cli`](https://github.com/gulpjs/gulp-cli) installed for this).
+You can alternatively use `npm run-script build` or `gulp --production`.
 
 This compiles all necessary files and places them inside a `dist` folder. Files from this folder will be used as source
 for a web server which automatically starts running when you run one of the above commands.
@@ -60,6 +66,33 @@ yarn run start
 
 The Development mode allows you to see changes on project files immediately in your browser since BrowserSync is watching
 for changes.
+
+
+## Download the latest data
+
+The necessary data has already been downloaded and is included in this repository. You can always download the latest data
+using the available download script (note that it's required to have `python3` installed for this):
+
+```bash
+python3 bin/download.py
+```
+
+After a few seconds you will see something like this:
+
+```bash
+Downloading: Studierende: Bundesländer, Semester, Nationalität, Geschlecht by Statistisches Bundesamt
+Download successful: src/data/data.csv
+```
+
+### Source configuration
+
+The file `data/source.json` contains important information which are being used to parse the remote source file correctly.
+
+| Key | Description | Configuration |
+| --- | --- | --- |
+| `url` | File which contains information about the source files and their file formats | Valid URL with protocol as string |
+| `keys` | Position of keys (headlines) inside the source file (X and Y) | Object with keys `x` and `y` which contain arrays with numbers |
+| `data_rows` | Position of first and last data row | Object with keys `first` and `last` as numbers. `last` can be a row number (e.g. `293`) or the difference from the last available row (e.g. `-4`, more flexible)
 
 
 ## Resources
