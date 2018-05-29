@@ -1,0 +1,11 @@
+{
+  "url": "https://www.govdata.de/ckan/api/rest/dataset/destatis-service-21311-0005",
+  "keys": {
+    "x": [0, 1],
+    "y": [4, 5]
+  },
+  "data_rows": {
+    "first": 6,
+    "last": -4
+  }
+}
