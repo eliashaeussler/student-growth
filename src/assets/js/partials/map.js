@@ -3,26 +3,32 @@
  */
 
 /**
- * Map visualization
- * Contains all relevant information and functions in relation to the map visualization with the D3 framework.
+ * Map visualizing the number of students in German states for a specific semester.
+ *
+ * Visualizes the number of students in Germany, separated in states, for a given semester. For this, a map of Germany
+ * is being used. The visualization is based on data which is provided by the Federal Statistical Office of Germany. It
+ * makes use of the D3 framework to build a SVG graphic which contains all 16 states of Germany, colored with the
+ * amount of students for the given semester.
  */
-export class Map
+export class VisualizationMap
 {
   /**
-   * Initialize Map Visualization
+   * Initialize map visualization.
+   *
+   * Defines some general settings regarding the map visualization.
    */
   constructor()
   {
     /**
      * Map object
-     * @type {{}}
+     * @type {Object}
      * @private
      */
     this._map = {};
 
     /**
      * Reference to chart
-     * @type {Chart|null}
+     * @type {Chart}
      * @private
      */
     this._chart = null;
@@ -57,7 +63,7 @@ export class Map
 
     /**
      * Colors for states
-     * @type {*|Array}
+     * @type {scale}
      * @private
      */
     this._colors = d3.scaleQuantize()
@@ -69,17 +75,17 @@ export class Map
 
     /**
      * Currently selected x key
-     * @type {string|null}
+     * @type {string}
      * @private
      */
-    this._key_x = null;
+    this._key_x = "";
 
     /**
      * Currently selected y key
-     * @type {string|null}
+     * @type {string}
      * @private
      */
-    this._key_y = null;
+    this._key_y = "";
 
     /**
      * Total number of data with currently selected keys
@@ -90,35 +96,36 @@ export class Map
 
     /**
      * Reference to svg element
-     * @type {null}
+     * @type {Selection}
      * @private
      */
     this._svg = null;
 
     /**
-     * Projection of dataset
-     * @type {null}
+     * Projection of data set
+     * @type {scale}
      * @private
      */
     this._proj = null;
 
     /**
      * Map paths
-     * @type {null}
+     * @type {path}
      * @private
      */
     this._path = null;
 
     /**
      * Tooltip for currently selected state
-     * @type {null}
+     * @type {Selection}
      * @private
      */
     this._tooltip = null;
   }
 
   /**
-   * Define map projection settings
+   * Define map projection settings.
+   *
    * Defines the geometrical map projection of Germany and creates the geometrical paths which are described by the geometrical projection.
    */
   defineSettings()
@@ -148,7 +155,8 @@ export class Map
   }
 
   /**
-   * Read data and render map
+   * Read data and render map.
+   *
    * Reads the given CSV and GeoJSON data and renders the map, based on the given data sets. Also defines the listener on user interactions.
    * @private
    */
@@ -260,7 +268,8 @@ export class Map
   }
 
   /**
-   * Define settings and render map
+   * Define settings and render map.
+   *
    * Creates the svg element if it does not exist, defines the map projection settings and renders the map with the D3 framework.
    */
   render()

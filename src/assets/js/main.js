@@ -22,14 +22,14 @@ window.Global = require('./modules/variables');
 
 // Load classes
 let { Data } = require('./partials/data');
-let { Map } = require('./partials/map');
+let { VisualizationMap } = require('./partials/map');
 let { Chart } = require('./partials/chart');
 
 
 
 // Initialize Chart and Map
 let chart = new Chart().init();
-let map = new Map().geo(Global.GEO_FILE).chart(chart);
+let map = new VisualizationMap().geo(Global.GEO_FILE).chart(chart);
 
 // Get data and update visualization
 new Data(map, chart);
