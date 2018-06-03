@@ -20,14 +20,14 @@ export class Data
    * information. Note that both the map and chart visualization needs to be initialized and provided when calling this
    * constructor.
    *
-   * @param map {Map}
+   * @param map {VisualizationMap}
    * @param chart {Chart}
    */
   constructor(map, chart)
   {
     /**
      * The initialized Map
-     * @type {Map}
+     * @type {VisualizationMap}
      */
     this.map = map;
 
