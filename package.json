@@ -1,6 +1,6 @@
 {
   "name": "students-viz",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Visualization about student growth in Germany",
   "main": "gulpfile.js",
   "scripts": {
