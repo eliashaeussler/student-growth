@@ -181,8 +181,8 @@ export class Chart
     // Chart line generator
     if (!this._line)
       this._line = d3.line()
-        .x(d => { return this._x(d.x); })
-        .y(d => { return this._y(d.y); });
+        .x(d => this._x(d.x))
+        .y(d => this._y(d.y));
 
     // Chart path element
     if (!this._path) {
@@ -208,20 +208,20 @@ export class Chart
 
       // Get and save values
       let _d = [], i = 0;
-      data.forEach(d => {
-        if (d.state === value) {
+      for (let currentData of data) {
+        if (currentData.state === value) {
           _d.push([]);
-          _d[i].x = d[""];
-          _d[i++].y = +d[this._key_x];
+          _d[i].x = currentData[""];
+          _d[i++].y = +currentData[this._key_x];
         }
-      });
+      }
 
       // Scale the range of the data
       this._x = d3.scalePoint()
         .range([0, this._width]);
       this._y = d3.scaleLinear()
-        .domain([d3.min(data, d => { return +d[this._key_x]; }),
-          d3.max(data, d => { return +d[this._key_x]; })])
+        .domain([d3.min(data, d => +d[this._key_x]),
+          d3.max(data, d => +d[this._key_x])])
         .rangeRound([this._height, 0]);
 
       // Chart X axis
@@ -245,7 +245,7 @@ export class Chart
         .attrs({
           "class": d => "chart__text" + (d === this._key_y ? " chart__text--active" : ""),
           "dx": "-1.4em",
-          "dy": ".3em",
+          "dy": "0.3em",
           "transform": "rotate(-70)"
         });
 
@@ -279,15 +279,15 @@ export class Chart
 
       // Edit data
       let tmp = [];
-      data.forEach(d => {
-        if (d.state === value) {
+      for(let currentData of data) {
+        if (currentData.state === value) {
           tmp.push({
-            x: this._x(d[""]),
-            y: this._y(d[this._key_x]),
-            active: d[""] === this._key_y
+            x: this._x(currentData[""]),
+            y: this._y(currentData[this._key_x]),
+            active: currentData[""] === this._key_y
           });
         }
-      });
+      }
 
       // Render dots
       this._g.selectAll("circle")
