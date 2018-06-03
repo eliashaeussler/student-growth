@@ -185,24 +185,25 @@ export class VisualizationMap
           // Get data value
           let value = +currentData[this._key_x];
 
-          if (currentData[""] === this._key_y)
+          if (currentData[""] !== this._key_y) {
+            continue;
+          }
+
+          // Add data value
+          this._total_count += value;
+
+          // Find state in GeoJSON data and set value
+          for (let feature in json.features)
           {
-            // Add data value
-            this._total_count += value;
+            if (!json.features.hasOwnProperty(feature)) continue;
 
-            // Find state in GeoJSON data and set value
-            for (let feature in json.features)
-            {
-              if (!json.features.hasOwnProperty(feature)) continue;
+            // Get json state name
+            let jsonState = json.features[feature].properties[Global.GEO_KEY_NAME];
 
-              // Get json state name
-              let jsonState = json.features[feature].properties[Global.GEO_KEY_NAME];
-
-              // Copy value into json
-              if (dataState === jsonState) {
-                json.features[feature].properties.value = value;
-                break;
-              }
+            // Copy value into json
+            if (dataState === jsonState) {
+              json.features[feature].properties.value = value;
+              break;
             }
           }
         }
