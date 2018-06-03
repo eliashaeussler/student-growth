@@ -14,7 +14,7 @@ The project is based on the [D3](https://github.com/d3/d3) library and developed
 
 * `yarn` or `npm` to install the required packages
 * [`gulp-cli`](https://github.com/gulpjs/gulp-cli) to build and run the project
-* [`python3`](https://www.python.org/) in case you want to download the latest data
+* [Python 3.5](https://www.python.org/) in case you want to download the latest data
 
 
 ## Installation
@@ -80,7 +80,7 @@ python3 bin/download.py
 After a few seconds you will see something like this:
 
 ```bash
-Downloading: Studierende: Bundesländer, Semester, Nationalität, Geschlecht by Statistisches Bundesamt
+Downloading: Studierende: Bundesländer, Semester, Nationalität, Geschlecht
 Download successful: src/data/data.csv
 ```
 
