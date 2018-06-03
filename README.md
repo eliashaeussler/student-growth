@@ -94,6 +94,18 @@ The file `data/source.json` contains important information which are being used 
 | `keys` | Position of keys (headlines) inside the source file (X and Y) | Object with keys `x` and `y` which contain arrays with numbers |
 | `data_rows` | Position of first and last data row | Object with keys `first` and `last` as numbers. `last` can be a row number (e.g. `293`) or the difference from the last available row (e.g. `-4`, more flexible)
 
+### Installing certificates on macOS
+
+If you are working with macOS, you might run into trouble when running the python script. You might get an output like this:
+
+```
+<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:749)>
+```
+
+In this case, you need to install additional certificates. The installation script is installed inside your Python application
+folder, e.g. `Applications/Python 3.6/Install Certificates.command`. It installs `certifi` on your system which is needed
+to handle secure remote connections.
+
 
 ## Resources
 
