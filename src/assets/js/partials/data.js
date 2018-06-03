@@ -5,12 +5,21 @@
 let { Spinner } = require('spin.js');
 
 /**
- * Data Provider and Visualization Initializing
+ * Visualization Data Provider and Initializer.
+ *
+ * Provides multiple data which is needed for both map and chart visualization of student growth in Germany in the last
+ * years. The class is also used to initialize the visualization. It serves as interface and data collector/provider
+ * between visualization classes and functions.
  */
 export class Data
 {
   /**
-   * Initialize visualization
+   * Read data information and initialize map and chart visualization.
+   *
+   * Reads the data information specified by a local information file and renders both visualizations based on these
+   * information. Note that both the map and chart visualization needs to be initialized and provided when calling this
+   * constructor.
+   *
    * @param map {Map}
    * @param chart {Chart}
    */
@@ -40,21 +49,25 @@ export class Data
   }
 
   /**
-   * Initialize spinner for given element and options
+   * Initialize spinner to show load state of visualizations.
+   *
+   * Initializes and renders a spinner which demonstrates the load state of both visualizations. You can pass custom
+   * options for the spinner, otherwise some default options will be used (custom and default options will not be merged).
+   *
    * @param opts
    */
   initSpinner(opts)
   {
-    let spinner_opts = opts || {
+    opts = opts || {
       color: '#111',
       zIndex: 0
     };
-    let spinner = new Spinner(spinner_opts).spin();
-    $(Global.FULLSCREEN_SELECTOR).append(spinner.el);
+    new Spinner(opts).spin($(Global.FULLSCREEN_SELECTOR)[0]);
   }
 
   /**
-   * Get data information and start visualization
+   * Get data information and start visualization.
+   *
    * Tries to read the information data file which contains all information which are needed to start the visualization.
    */
   getDataInformation()
@@ -162,7 +175,8 @@ export class Data
   }
 
   /**
-   * Update svg graphics
+   * Update svg graphics.
+   *
    * Reads the user selected keys, changes the svg graphics (map and chart) and starts rendering them.
    */
   update()
@@ -182,7 +196,9 @@ export class Data
   }
 
   /**
-   * Close fullscreen
+   * Close fullscreen.
+   *
+   * Hides the fullscreen which is being used to demonstrate the load state of both visualizations.
    */
   closeFullscreen()
   {
