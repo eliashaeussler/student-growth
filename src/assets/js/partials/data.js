@@ -107,7 +107,7 @@ export class Data
           {
             if (!data.attributes.hasOwnProperty(key)) continue;
 
-            output += `<select name="${key}" id="${key}">`;
+            output += `<select name="${key}" class="controls__${key}">`;
             for (let attr of data.attributes[key]) {
               output += `<option value="${attr}">${attr}</option>`;
             }
@@ -120,7 +120,7 @@ export class Data
         // Register Change events for visualization options
         for (let key of attributes)
         {
-          $(`#${key}`).on('change', () => { this.update(); });
+          $(`.controls__${key}`).on('change', () => { this.update(); });
         }
 
         // Start visualization, then hide spinner
@@ -182,10 +182,10 @@ export class Data
   update()
   {
     // Read and format keys
-    let nationality = $('#nationality :selected').val();
-    let sex = $('#sex :selected').val();
+    let nationality = $('.controls__nationality :selected').val();
+    let sex = $('.controls__sex :selected').val();
     let key_x = `${nationality} ${sex}`;
-    let key_y = $('#semester :selected').val();
+    let key_y = $('.controls__semester :selected').val();
 
     // Set keys
     this.map.key_x(key_x).key_y(key_y);
