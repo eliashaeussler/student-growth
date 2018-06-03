@@ -3,19 +3,24 @@
  */
 
 /**
- * Chart visualization
- * Contains all relevant information and functions in relation to the chart visualization with the D3 framework.
+ * Chart visualizing the student growth of any state in Germany during the last years.
+ *
+ * Visualizes the student growth in Germany of a specific state during the last years. The visualization is done by a
+ * line chart using the D3 framework. The chart will only be visible if the user moves its mouse over any state on the
+ * map. When hovering a state, the chart is being generated and will be visible.
  */
 export class Chart
 {
   /**
-   * Initialize Visualization Chart
+   * Initialize line chart visualization.
+   *
+   * Defines some general settings regarding the line chart visualization.
    */
   constructor()
   {
     /**
      * Chart object
-     * @type {{}}
+     * @type {Object}
      * @private
      */
     this._chart = {};
@@ -36,7 +41,7 @@ export class Chart
 
     /**
      * Margins
-     * @type {{top: number, right: number, bottom: number, left: number}}
+     * @type {object}
      * @private
      */
     this._margin = {
@@ -69,21 +74,21 @@ export class Chart
 
     /**
      * Currently selected x key
-     * @type {null}
+     * @type {string}
      * @private
      */
-    this._key_x = null;
+    this._key_x = "";
 
     /**
      * Currently selected y key
-     * @type {null}
+     * @type {string}
      * @private
      */
-    this._key_y = null;
+    this._key_y = "";
 
     /**
      * Reference to svg element
-     * @type {null}
+     * @type {Selection}
      * @private
      */
     this._svg = null;
@@ -93,71 +98,82 @@ export class Chart
      * @type {string}
      * @private
      */
-    this._title = null;
+    this._title = "";
 
     /**
      * Chart subtitle (contains the name of the current selected keys)
      * @type {string}
      * @private
      */
-    this._subtitle = null;
+    this._subtitle = "";
 
-    // Chart path and line
+    /**
+     * Chart path
+     * @type {Selection}
+     * @private
+     */
     this._path = null;
+
+    /**
+     * Chart line
+     * @type {line}
+     * @private
+     */
     this._line = null;
 
     /**
      * Graphics element of chart
-     * @type {null}
+     * @type {Selection}
      * @private
      */
     this._g = null;
 
     /**
      * Graphics element of x axis
-     * @type {null}
+     * @type {Selection}
      * @private
      */
     this._gX = null;
 
     /**
      * Graphics element of y axis
-     * @type {null}
+     * @type {Selection}
      * @private
      */
     this._gY = null;
 
     /**
      * x points of data
-     * @type {null}
+     * @type {continuous}
      * @private
      */
     this._x = null;
 
     /**
      * y points of data
-     * @type {null}
+     * @type {continuous}
      * @private
      */
     this._y = null;
 
     /**
      * x axis
-     * @type {null}
+     * @type {axis}
      * @private
      */
     this._xAxis = null;
 
     /**
      * y axis
-     * @type {null}
+     * @type {axis}
      * @private
      */
     this._yAxis = null;
   }
 
   /**
-   * Define chart projection settings
+   * Define chart projection settings.
+   *
    * Creates the line generator for the chart and appends the path to the main graphics element.
    */
   defineSettings()
@@ -176,7 +192,8 @@ export class Chart
 
   /**
    * Read data and render chart.
-   * Reads the given CSV renders the chart, based on the given datasets. Also defines the listener on user interactions.
+   *
+   * Reads the given CSV data and renders the chart, based on the given data sets. It also defines the listener on user interactions.
    * @param value
    */
   render(value)
@@ -291,8 +308,10 @@ export class Chart
   }
 
   /**
-   * Define settings and render chart
-   * Creates the svg element and the graphics elements if they do not exist, create the chart title element and defines the map projection settings.
+   * Define settings and render chart.
+   *
+   * Creates the svg and graphics elements if they do not exist and the chart title element.
+   * Defines the map projection settings afterwards.
    */
   init()
   {
@@ -331,7 +350,7 @@ export class Chart
     }
 
     // Create title text
-    if (this._title == null) {
+    if (!this._title) {
       this._title = this._svg.append("text")
         .attrs({
           "x": this._margin.left + this._width / 2,
@@ -341,7 +360,7 @@ export class Chart
     }
 
     // Create subtitle text
-    if (this._subtitle == null) {
+    if (!this._subtitle) {
       this._subtitle = this._svg.append("text")
         .attrs({
           "x": this._margin.left + this._width / 2,
