@@ -1,4 +1,4 @@
-![license](https://img.shields.io/github/license/eliashaeussler/student-growth.svg)
+[![license](https://img.shields.io/github/license/eliashaeussler/student-growth.svg)](LICENSE.md)
 [![release](https://img.shields.io/github/release/eliashaeussler/student-growth.svg)](https://github.com/eliashaeussler/student-growth/releases/)
 
 
