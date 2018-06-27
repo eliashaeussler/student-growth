@@ -16,4 +16,9 @@
 @import 'partials/general';
 @import 'partials/grid';
 @import 'partials/page';
+@import 'partials/spinner';
 @import 'partials/visualization';
+
+// Third party modules
+//noinspection CssUnknownTarget
+@import 'spinners/3-wave';

@@ -51,18 +51,21 @@ export class Data
   /**
    * Initialize spinner to show load state of visualizations.
    *
-   * Initializes and renders a spinner which demonstrates the load state of both visualizations. You can pass custom
-   * options for the spinner, otherwise some default options will be used (custom and default options will not be merged).
-   *
-   * @param opts
+   * Initializes and renders a spinner which demonstrates the load state of both visualizations.
    */
-  initSpinner(opts)
+  initSpinner()
   {
-    opts = opts || {
-      color: '#111',
-      zIndex: 0
-    };
-    new Spinner(opts).spin($(Global.FULLSCREEN_SELECTOR)[0]);
+    // Markup from Spinkit
+    let spinner = `<div class="sk-wave">
+        <div class="sk-rect sk-rect1"></div>
+        <div class="sk-rect sk-rect2"></div>
+        <div class="sk-rect sk-rect3"></div>
+        <div class="sk-rect sk-rect4"></div>
+        <div class="sk-rect sk-rect5"></div>
+      </div>`;
+
+    let additionalClass = "spinner";
+    $(Global.FULLSCREEN_SELECTOR).html(spinner).find('> div').addClass(additionalClass);
   }
 
   /**

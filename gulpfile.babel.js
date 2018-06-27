@@ -38,7 +38,8 @@ const PATHS = {
     all: "src/assets/scss/**/*.scss",
     entry: "src/assets/scss/main.scss",
     modules: [
-      "node_modules/reset-css"
+      "node_modules/reset-css",
+      "node_modules/spinkit/scss"
     ]
   },
   pages: "src/**/*.html"
@@ -72,7 +73,7 @@ let sass = () =>
     .pipe(named())
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      includePaths: [PATHS.sass.entry, PATHS.sass.modules]
+      includePaths: [PATHS.sass.entry].concat(PATHS.sass.modules)
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer({ browsers: COMPATIBILITY }))
     .pipe($.if(PRODUCTION, $.cleanCss({
