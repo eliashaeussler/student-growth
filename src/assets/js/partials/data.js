@@ -2,8 +2,6 @@
  * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
  */
 
-let { Spinner } = require('spin.js');
-
 /**
  * Visualization Data Provider and Initializer.
  *
