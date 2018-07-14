@@ -10,7 +10,8 @@
 @import 'modules/variables';
 
 // Fonts
-@import 'partials/fonts';
+// noinspection CssUnknownTarget (generated using Google Fonts Webpack Plugin)
+@import 'fonts.css';
 
 // Partials
 @import 'partials/general';

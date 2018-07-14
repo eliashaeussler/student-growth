@@ -99,19 +99,6 @@ let lint = () =>
     .pipe($.jshint.reporter('default'));
 };
 
-let webpackConfig = {
-  rules: [
-    {
-      test: /.js$/,
-      use: [
-        {
-          loader: 'babel-loader'
-        }
-      ]
-    }
-  ]
-};
-
 /**
  * Concatenate and minify JavaScript
  * @returns {*}
@@ -121,7 +108,7 @@ let javascript = () =>
   return gulp.src(PATHS.javascript.entry)
     .pipe(named())
     .pipe($.sourcemaps.init())
-    .pipe(webpackStream({ module: webpackConfig }, webpack))
+    .pipe(webpackStream(require('./webpack.config'), webpack))
     .pipe($.if(PRODUCTION, $.uglify().on('error', e => { console.log(e); })))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
     .pipe(gulp.dest(PATHS.dist + '/assets/js'));

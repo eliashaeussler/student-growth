@@ -30,6 +30,7 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.24.4",
+    "google-fonts-webpack-plugin": "^0.4.4",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-clean-css": "^3.9.4",
@@ -42,7 +43,7 @@
     "jshint": "^2.9.5",
     "rimraf": "^2.6.2",
     "vinyl-named": "^1.1.0",
-    "webpack": "^4.8.1",
+    "webpack": "^3.0",
     "webpack-stream": "^4.0.3",
     "yargs": "^11.0.0"
   },
