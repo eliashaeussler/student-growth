@@ -3,12 +3,13 @@
  */
 
 const GoogleFontsPlugin = require('google-fonts-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   module: {
     rules: [
       {
-        test: /.js$/,
+        test: /\.js$/,
         use: [
           {
             loader: 'babel-loader'
@@ -25,6 +26,7 @@ module.exports = {
       ],
       filename: "../css/fonts.css",
       path: "../fonts/"
-    })
+    }),
+    new UglifyJsPlugin()
   ]
 };

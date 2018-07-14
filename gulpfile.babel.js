@@ -109,7 +109,6 @@ let javascript = () =>
     .pipe(named())
     .pipe($.sourcemaps.init())
     .pipe(webpackStream(require('./webpack.config'), webpack))
-    .pipe($.if(PRODUCTION, $.uglify().on('error', e => { console.log(e); })))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
     .pipe(gulp.dest(PATHS.dist + '/assets/js'));
 };
