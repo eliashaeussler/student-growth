@@ -3,8 +3,11 @@
  */
 
 // Reset CSS
-//noinspection CssUnknownTarget
+// noinspection CssUnknownTarget (source path included by Gulp)
 @import '_reset.scss';
+
+// Functions
+@import 'modules/functions';
 
 // Variables
 @import 'modules/variables';
@@ -15,11 +18,14 @@
 
 // Partials
 @import 'partials/general';
+@import 'partials/code';
 @import 'partials/grid';
+@import 'partials/input';
+@import 'partials/link';
 @import 'partials/page';
 @import 'partials/spinner';
 @import 'partials/visualization';
 
 // Third party modules
-//noinspection CssUnknownTarget
+// noinspection CssUnknownTarget (source path included by Gulp)
 @import 'spinners/3-wave';

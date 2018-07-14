@@ -1,0 +1,43 @@
+/*!
+ * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
+ */
+
+button,
+select {
+  font-family: $font-family-sans-serif;
+  font-size: $input-font-size;
+  background: $input-background;
+  padding: $input-padding;
+  border: $input-border;
+  border-radius: $input-border-radius;
+  border-bottom: {
+    width: 1px;
+    style: dotted;
+  }
+  cursor: pointer;
+}
+
+button {
+  border-bottom-color: $button-border-color;
+  color: $button-color;
+  transition: color $transition, text-shadow $transition;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $button-color-hover;
+  }
+
+  &:active,
+  &:focus {
+    text-shadow: 0 0 20px $light-gray;
+  }
+}
+
+select {
+  appearance: none;
+  margin: 0 0.2em;
+  border-bottom-color: $select-border-color;
+  text-align-last: $select-text-align;
+  transition: background $transition, box-shadow $transition;
+}

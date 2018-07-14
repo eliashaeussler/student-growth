@@ -1,0 +1,17 @@
+/*!
+ * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
+ */
+
+$z-index: (
+  chart__dot: 10,
+  map__tooltip: 20,
+  fullscreen: 100
+);
+
+@function z($key) {
+  @if map-has-key($z-index, $key) {
+    @return map-get($z-index, $key);
+  } @else {
+    @return -1;
+  }
+}

@@ -6,10 +6,7 @@
   &__controls,
   &__map,
   &__chart {
-    margin: {
-      top: 1em;
-      bottom: 1em;
-    }
+    margin: 1em 0;
 
     &:first-child {
       margin-top: 0;
@@ -36,13 +33,13 @@
     .chart {
       &__line {
         fill: none;
-        stroke: #ff8b94;
-        stroke-width: 2px;
+        stroke: $chart-line-color;
+        stroke-width: $chart-line-width;
         stroke-linejoin: round;
         stroke-linecap: round;
 
         &--grid {
-          stroke-opacity: 0.5;
+          stroke-opacity: $chart-line-grid-opacity;
           shape-rendering: crispEdges;
         }
       }
@@ -55,17 +52,17 @@
 
         path,
         line {
-          fill: none;
-          stroke: #999;
+          fill: $chart-axis-background;
+          stroke: $chart-axis-color;
         }
       }
 
       &__text {
-        fill: #999;
+        fill: $chart-text-color;
         font-size: 1em;
 
         &--active {
-          fill: #ff8b94;
+          fill: $chart-text-color-active;
         }
       }
 
@@ -76,22 +73,22 @@
 
       &__title {
         font-size: 1.1em;
-        fill: #999;
+        fill: $chart-title-color;
       }
 
       &__subtitle {
         font-size: 0.8em;
-        fill: #aaa;
+        fill: $chart-subtitle-color;
       }
 
       &__dot {
-        fill: #f9f9f9;
-        stroke: #ff8b94;
-        stroke-width: 2px;
-        z-index: 10;
+        fill: $chart-dot-background;
+        stroke: $chart-dot-border-color;
+        stroke-width: $chart-dot-border-width;
+        z-index: z(chart__dot);
 
         &--active {
-          fill: #ff8b94;
+          fill: $chart-dot-background-active;
         }
       }
     }
@@ -101,18 +98,13 @@
     .map {
       &__tooltip {
         position: absolute;
-        z-index: 99;
-        background: rgba(17, 17, 17,.6);
-        border-radius: 3px;
-        color: #eee;
+        z-index: z(map__tooltip);
+        background: $map-tooltip-background;
+        border-radius: $map-tooltip-border-radius;
+        color: $map-tooltip-color;
         font-size: 0.7em;
         text-align: center;
-        padding: {
-          top: 0.7em;
-          right: 1em;
-          bottom: 0.7em;
-          left: 1em;
-        }
+        padding: 0.7em 1em;
         transform: translate(-50%, -100%);
 
         div {
@@ -122,11 +114,11 @@
       }
 
       &__path {
-        stroke: #aaa;
-        cursor: crosshair;
+        stroke: $map-path-color;
+        cursor: $map-path-cursor;
 
         &:hover {
-          fill-opacity: 0.7;
+          fill-opacity: $map-path-opacity-hover;
         }
       }
     }

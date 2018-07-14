@@ -2,15 +2,81 @@
  * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
  */
 
+// Colors
+$primary-color: #ff8b94;
+$white: #f9f9f9;
+$white-gray: #eee;
+$light-gray: #ccc;
+$medium-gray-1: #aaa;
+$medium-gray-2: #999;
+$medium-gray-3: #666;
+$dark-gray: #333;
+$error-color: #ffd3b6;
+
 // Font
 $font-family-sans-serif: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family-monospace: 'Inconsolata', monotype, monospace;
+$font-weight-bold: 700;
 
 // Transition
 $transition-timing: 0.2s;
 $transition-function: ease-in-out;
 $transition: $transition-timing $transition-function;
 
+// Code
+$code-color: $dark-gray;
+
+// Input
+$input-font-size: 1em;
+$input-background: none;
+$input-padding: 0.4em 1.2em;
+$input-border: none;
+$input-border-radius: 0;
+
+// Input: Button
+$button-border-color: $medium-gray-3;
+$button-color: $dark-gray;
+$button-color-hover: $medium-gray-3;
+
+// Input: Select
+$select-border-color: $light-gray;
+$select-text-align: center;
+
+// Link
+$link-color: $primary-color;
+$link-color-hover: $dark-gray;
+
+// Page
+$page-border-color: $white-gray;
+$page-header-title-font-size: 1.6em;
+$page-header-title-font-weight: $font-weight-bold;
+$page-header-list-style: decimal;
+$page-footer-color: $medium-gray-3;
+$page-footer-font-size: 0.8em;
+
 // Spinner
 $spinkit-spinner-margin: 0 auto;
-$spinkit-spinner-color: #999;
+$spinkit-spinner-color: $medium-gray-2;
+
+// Visualization: Chart
+$chart-line-color: $primary-color;
+$chart-line-width: 2px;
+$chart-line-grid-opacity: 0.5;
+$chart-axis-background: none;
+$chart-axis-color: $medium-gray-2;
+$chart-text-color: $medium-gray-2;
+$chart-text-color-active: $primary-color;
+$chart-title-color: $medium-gray-2;
+$chart-subtitle-color: $medium-gray-1;
+$chart-dot-background: $white;
+$chart-dot-background-active: $primary-color;
+$chart-dot-border-color: $primary-color;
+$chart-dot-border-width: 2px;
+
+// Visualization: Map
+$map-tooltip-background: rgba($dark-gray, 0.7);
+$map-tooltip-border-radius: 3px;
+$map-tooltip-color: $white-gray;
+$map-path-color: $medium-gray-1;
+$map-path-cursor: crosshair;
+$map-path-opacity-hover: 0.7;
