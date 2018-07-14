@@ -5,7 +5,10 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
-    "build": "gulp --production"
+    "build": "gulp --production && gulp server",
+    "sources": "gulp --production",
+    "server": "gulp server",
+    "watch": "gulp server && gulp watch"
   },
   "repository": "https://github.com/eliashaeussler/student-growth",
   "author": "Elias Häußler <mail@elias-haeussler.de>",

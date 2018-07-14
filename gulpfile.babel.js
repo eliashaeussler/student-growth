@@ -183,5 +183,11 @@ let build = gulp.series(clean, gulp.parallel(copy, lint, sass, javascript, pages
 // Default Task
 gulp.task('default', !PRODUCTION
   ? gulp.series(build, server, watch)
-  : gulp.series(build, server)
+  : gulp.series(build)
 );
+
+// Server Task
+gulp.task('server', server);
+
+// Watch Task
+gulp.task('watch', watch);

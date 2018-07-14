@@ -43,7 +43,7 @@ In order to access the website which shows the visualization, you need to build 
 yarn run build
 ```
 
-You can alternatively use `npm run-script build` or `gulp --production`.
+You can alternatively use `npm run-script build` or `gulp --production && gulp server`.
 
 This compiles all necessary files and places them inside a `dist` folder. Files from this folder will be used as source
 for a web server which automatically starts running when you run one of the above commands.
@@ -66,6 +66,19 @@ yarn run start
 
 The Development mode allows you to see changes on project files immediately in your browser since BrowserSync is watching
 for changes.
+
+
+### Other tasks
+
+| NPM script | Gulp task | Description |
+| ---------- | --------- | ----------- |
+| `sources` | `default --production` | Build only the source files and does not start the server |
+| `server` | `server` | Run the server without creating any source files |
+| `watch` | `server && watch` | Run the server without creating source files and watch for changes |
+
+All NPM scripts need to be executed using `yarn run <command>` or `npm run-script <command>`.
+When running Gulp tasks, prefix all of them with `gulp`, e.g. `gulp server` or `gulp server && gulp watch`.
+
 
 
 ## Download the latest data
