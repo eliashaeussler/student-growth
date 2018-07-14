@@ -53,6 +53,9 @@ export class Data
    */
   initSpinner()
   {
+    // Hide page
+    Data.hidePage();
+
     // Markup from Spinkit
     let spinner = `<div class="sk-wave">
         <div class="sk-rect sk-rect1"></div>
@@ -129,12 +132,13 @@ export class Data
           this.map.data(this.dataFile),
           this.chart.data(this.dataFile),
           this.update()
-        ).done(this.closeFullscreen);
+        ).done(Data.closeFullscreen);
 
         // Change document title
         document.title = `${document.title}: ${data.title}`;
       })
-      .fail(() => {
+      .fail(() =>
+      {
         // Display error
         $(Global.DATA_INFO_SELECTOR).html
         (
@@ -171,7 +175,12 @@ export class Data
         $('main').hide();
 
         // Hide spinner
-        this.closeFullscreen();
+        Data.closeFullscreen();
+      })
+      .always(() =>
+      {
+        // Show page
+        Data.showPage();
       });
   }
 
@@ -201,10 +210,30 @@ export class Data
    *
    * Hides the fullscreen which is being used to demonstrate the load state of both visualizations.
    */
-  closeFullscreen()
+  static closeFullscreen()
   {
     let scr = $(Global.FULLSCREEN_SELECTOR);
     $(scr).find('*').delay(300).fadeOut(300);
     $(scr).delay(300).fadeOut(600);
+  }
+
+  /**
+   * Hide page.
+   *
+   * Hides the page wrapper which includes all page contents.
+   */
+  static hidePage()
+  {
+    $(Global.PAGE_WRAPPER_SELECTOR).hide();
+  }
+
+  /**
+   * Show page.
+   *
+   * Makes the page wrapper visible which includes all page contents.
+   */
+  static showPage()
+  {
+    $(Global.PAGE_WRAPPER_SELECTOR).show();
   }
 }

@@ -24,6 +24,12 @@ module.exports = {
   FULLSCREEN_SELECTOR: ".fullscreen",
 
   /**
+   * CSS selector for page wrapper element
+   * @type {string}
+   */
+  PAGE_WRAPPER_SELECTOR: ".page-wrapper",
+
+  /**
    * CSS selector for data info element
    * @type {string}
    */
