@@ -57,7 +57,7 @@ module.exports = {
    * Geometrical center of Germany
    * @type {number[]}
    */
-  GEO_CENTER: [10.45, 51.16],
+  GEO_CENTER: [10.447683, 51.320915],
 
   /**
    * Scaling for Geo Map
