@@ -5,6 +5,7 @@
 $z-index: (
   chart__dot: 10,
   map__tooltip: 20,
+  device-notice: 30,
   fullscreen: 100
 );
 
@@ -12,6 +13,6 @@ $z-index: (
   @if map-has-key($z-index, $key) {
     @return map-get($z-index, $key);
   } @else {
-    @return -1;
+    @error "Unknow key `#{$key}`. Use one of `#{map-keys($z-index)}` instead.";
   }
 }

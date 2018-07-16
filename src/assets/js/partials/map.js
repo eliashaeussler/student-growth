@@ -20,13 +20,6 @@ export class VisualizationMap
   constructor()
   {
     /**
-     * Map object
-     * @type {Object}
-     * @private
-     */
-    this._map = {};
-
-    /**
      * Reference to chart
      * @type {Chart}
      * @private
@@ -34,18 +27,25 @@ export class VisualizationMap
     this._chart = null;
 
     /**
+     * Aspect ratio of the map (height / width)
+     * @type {number}
+     * @private
+     */
+    this._aspectRatio = 1.35;
+
+    /**
      * Width of svg element
      * @type {number}
      * @private
      */
-    this._width = 600;
+    this._width = 460;
 
     /**
      * Height of svg element
      * @type {number}
      * @private
      */
-    this._height = 700;
+    this._height = this._width * this._aspectRatio;
 
     /**
      * CSV data from source
@@ -100,6 +100,13 @@ export class VisualizationMap
      * @private
      */
     this._svg = null;
+
+    /**
+     * Reference to garphics element
+     * @type {Selection}
+     * @private
+     */
+    this._g = null;
 
     /**
      * Projection of data set
@@ -162,13 +169,13 @@ export class VisualizationMap
    */
   _renderMap()
   {
-    // Loop through CSV dataset
+    // Loop through CSV data set
     d3.csv(this._data).then(data =>
     {
       // Set color domain
       this._colors.domain([
-        d3.min(data, d => { if (d[""] === this._key_y) return +d[this._key_x]; }),
-        d3.max(data, d => { if (d[""] === this._key_y) return +d[this._key_x]; })
+        d3.min(data, d => { if (d[Global.DATA_KEY_SEMESTER] === this._key_y) return +d[this._key_x]; }),
+        d3.max(data, d => { if (d[Global.DATA_KEY_SEMESTER] === this._key_y) return +d[this._key_x]; })
       ]);
 
       d3.json(this._geo).then(json =>
@@ -185,7 +192,7 @@ export class VisualizationMap
           // Get data value
           let value = +currentData[this._key_x];
 
-          if (currentData[""] !== this._key_y) {
+          if (currentData[Global.DATA_KEY_SEMESTER] !== this._key_y) {
             continue;
           }
 
@@ -209,7 +216,7 @@ export class VisualizationMap
         }
 
         // Set state paths
-        this._svg.selectAll("path")
+        this._g.selectAll("path")
           .data(json.features)
           .enter()
           .append("path")
@@ -224,8 +231,8 @@ export class VisualizationMap
             // Set tooltip content
             let state = d.properties[Global.GEO_KEY_NAME];
             let value = d.properties.value;
-            let prct = Math.round((value / this._total_count) * 10000) / 100;
-            this._tooltip.html(`<div>${state}</div>${value} (${prct}%)`);
+            let percentage = Math.round((value / this._total_count) * 10000) / 100;
+            this._tooltip.html(`<div>${state}</div>${value.toLocaleString()} (${percentage}%)`);
 
             // Render chart
             this._chart.render(state);
@@ -258,7 +265,7 @@ export class VisualizationMap
           });
 
         // Fill states with color
-        this._svg.selectAll("path")
+        this._g.selectAll("path")
           .transition()
           .style("fill", d => {
             let val = d.properties.value;
@@ -280,13 +287,16 @@ export class VisualizationMap
       this._svg = d3.select(Global.MAP_SELECTOR)
         .append("svg")
         .attrs({
-          "width": this._width,
-          "height": this._height
+          "width": "100%",
+          "height": "100%",
+          "viewBox": `0 0 ${this._width} ${this._height}`
         });
     }
 
-    // Set width of visualization controls
-    $(Global.CONTROLS_SELECTOR).css('width', this._width + "px");
+    // Create graphics element
+    if (this._g == null) {
+      this._g = this._svg.append("g");
+    }
 
     // Define map projection settings
     this.defineSettings();

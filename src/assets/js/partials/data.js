@@ -127,12 +127,18 @@ export class Data
           $(`.controls__${key}`).on('change', () => { this.update(); });
         }
 
+        // Check if cookie for device-notice is set
+        Data.initDeviceNotice();
+
         // Start visualization, then hide spinner
         $.when(
           this.map.data(this.dataFile),
           this.chart.data(this.dataFile),
           this.update()
         ).done(Data.closeFullscreen);
+
+        // Add event for confirm button of device notice
+        $(Global.DEVICE_NOTICE_CONFIRM_SELECTOR).on('click', () => { Data.hideDeviceNotice(); });
 
         // Change document title
         document.title = `${document.title}: ${data.title}`;
@@ -235,5 +241,35 @@ export class Data
   static showPage()
   {
     $(Global.PAGE_WRAPPER_SELECTOR).show();
+  }
+
+  /**
+   * Initialize device notice.
+   *
+   * Checks whether the device notice confirmation cookie is already set. If true, the appropriate class is being added to the body element.
+   */
+  static initDeviceNotice()
+  {
+    // Read all cookies
+    let cookies = document.cookie.split(';').filter(c => c.length > 0);
+
+    // Set confirm class if cookie is already set
+    if (cookies.some(c => c.indexOf(`${Global.DEVICE_NOTICE_COOKIE}=`) >= 0)) {
+      $('body').addClass(Global.DEVICE_NOTICE_CONFIRMED_CLASS);
+    }
+  }
+
+  /**
+   * Hide device notice.
+   *
+   * Sets the device notice confirmation cookie and adds the appropriate class to the body element.
+   */
+  static hideDeviceNotice()
+  {
+    // Set cookie
+    document.cookie = `${Global.DEVICE_NOTICE_COOKIE}=true`;
+
+    // Add class to hide device notice
+    $('body').addClass(Global.DEVICE_NOTICE_CONFIRMED_CLASS);
   }
 }

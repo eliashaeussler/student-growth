@@ -26,6 +26,20 @@ $transition: $transition-timing $transition-function;
 // Code
 $code-color: $dark-gray;
 
+// Device Notice
+$device-notice-breakpoint: medium;
+$device-notice-background: rgba($dark-gray, 0.8);
+$device-notice-message-background: $dark-gray;
+$device-notice-message-color: $white;
+$device-notice-message-padding: 2em;
+$device-notice-message-line-height: 1.7;
+$device-notice-confirm-background: $primary-color;
+$device-notice-confirm-background-hover: darken($device-notice-confirm-background, 10%);
+$device-notice-confirm-color: $white;
+$device-notice-confirm-color-hover: $device-notice-confirm-color;
+$device-notice-confirm-border-radius: 2px;
+$device-notice-confirm-padding: 0.2em 0.8em;
+
 // Input
 $input-font-size: 1em;
 $input-background: none;

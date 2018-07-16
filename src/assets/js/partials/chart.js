@@ -26,18 +26,25 @@ export class Chart
     this._chart = {};
 
     /**
+     * Aspect ratio of the chart (height / width)
+     * @type {number}
+     * @private
+     */
+    this._aspectRatio = 0.7;
+
+    /**
      * Total width
      * @type {number}
      * @private
      */
-    this._w = 700;
+    this._w = 650;
 
     /**
      * Total height
      * @type {number}
      * @private
      */
-    this._h = 500;
+    this._h = this._w * this._aspectRatio;
 
     /**
      * Margins
@@ -47,8 +54,8 @@ export class Chart
     this._margin = {
       top: 50,
       right: 30,
-      bottom: 120,
-      left: 80
+      bottom: 70,
+      left: 50
     };
 
     /**
@@ -94,6 +101,13 @@ export class Chart
     this._svg = null;
 
     /**
+     * Reference to main graphics element
+     * @type {Selection}
+     * @private
+     */
+    this._g = null;
+
+    /**
      * Chart title of current selected data (contains the name of the current selected state)
      * @type {string}
      * @private
@@ -126,7 +140,7 @@ export class Chart
      * @type {Selection}
      * @private
      */
-    this._g = null;
+    this._gChart = null;
 
     /**
      * Graphics element of x axis
@@ -186,7 +200,7 @@ export class Chart
 
     // Chart path element
     if (!this._path) {
-      this._path = this._g.append("path");
+      this._path = this._gChart.append("path");
     }
   }
 
@@ -211,7 +225,7 @@ export class Chart
       for (let currentData of data) {
         if (currentData.state === value) {
           _d.push([]);
-          _d[i].x = currentData[""];
+          _d[i].x = currentData[Global.DATA_KEY_SEMESTER];
           _d[i++].y = +currentData[this._key_x];
         }
       }
@@ -256,7 +270,7 @@ export class Chart
         .attr("class", "chart__text");
 
       // Add line to chart
-      this._g.selectAll("path")
+      this._gChart.selectAll("path")
         .transition()
         .attrs({
           "class": "chart__line",
@@ -282,20 +296,20 @@ export class Chart
       for(let currentData of data) {
         if (currentData.state === value) {
           tmp.push({
-            x: this._x(currentData[""]),
+            x: this._x(currentData[Global.DATA_KEY_SEMESTER]),
             y: this._y(currentData[this._key_x]),
-            active: currentData[""] === this._key_y
+            active: currentData[Global.DATA_KEY_SEMESTER] === this._key_y
           });
         }
       }
 
       // Render dots
-      this._g.selectAll("circle")
+      this._gChart.selectAll("circle")
         .data(tmp)
         .enter()
         .append("circle");
 
-      this._g.selectAll("circle")
+      this._gChart.selectAll("circle")
         .data(tmp)
         .transition()
         .attrs({
@@ -320,15 +334,21 @@ export class Chart
       this._svg = d3.select(Global.CHART_SELECTOR)
         .append("svg")
         .attrs({
-          "width": this._width + this._margin.left + this._margin.right,
-          "height": this._height + this._margin.top + this._margin.bottom
+          "width": "100%",
+          "height": "100%",
+          "viewBox": `0 0 ${this._width + this._margin.left + this._margin.right} ${this._height + this._margin.top + this._margin.bottom}`
         })
         .style("visibility", "hidden");
     }
 
+    // Create main graphics element
+    if (this._g == null) {
+      this._g = this._svg.append("g");
+    }
+
     // Create svg chart axis graphics element
     if (this._gX == null) {
-      this._gX = this._svg.append("g")
+      this._gX = this._g.append("g")
         .attrs({
           "class": "chart__axis chart__axis--x",
           "transform": "translate(" + this._margin.left + ", " + (this._height + this._margin.top) + ")"
@@ -336,7 +356,7 @@ export class Chart
     }
 
     if (this._gY == null) {
-      this._gY = this._svg.append("g")
+      this._gY = this._g.append("g")
         .attrs({
           "class": "chart__axis chart__axis--y",
           "transform": "translate(" + this._margin.left + ", " + this._margin.top + ")"
@@ -344,14 +364,14 @@ export class Chart
     }
 
     // Create svg chart graphics element
-    if (this._g == null) {
-      this._g = this._svg.append("g")
+    if (this._gChart == null) {
+      this._gChart = this._g.append("g")
         .attr("transform", "translate(" + this._margin.left + "," + this._margin.top + ")");
     }
 
     // Create title text
     if (!this._title) {
-      this._title = this._svg.append("text")
+      this._title = this._g.append("text")
         .attrs({
           "x": this._margin.left + this._width / 2,
           "y": 15,
@@ -361,7 +381,7 @@ export class Chart
 
     // Create subtitle text
     if (!this._subtitle) {
-      this._subtitle = this._svg.append("text")
+      this._subtitle = this._g.append("text")
         .attrs({
           "x": this._margin.left + this._width / 2,
           "y": 40,

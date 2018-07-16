@@ -21,11 +21,13 @@
   </header> <!-- eof: .page-header -->
 
   <main class="page">
-    <section class="page__section page__section--visualization visualization">
-      <div class="visualization__controls controls" style="width: auto;"></div>
-      <div class="grid">
-        <div class="visualization__map map grid__cell"></div>
-        <div class="visualization__chart chart grid__cell"></div>
+    <section class="visualization">
+      <div class="visualization__container visualization__container--map">
+        <div class="visualization__controls controls"></div>
+        <div class="visualization__map map"></div>
+      </div>
+      <div class="visualization__container visualization__container--chart">
+        <div class="visualization__chart chart"></div>
       </div>
     </section> <!-- eof: .visualization -->
   </main> <!-- eof: .page -->
@@ -40,6 +42,23 @@
 </div> <!-- eof: .page-wrapper -->
 
 <div class="fullscreen"></div>
+
+<div class="device-notice">
+  <div class="device-notice__message">
+    <p>
+      This website is not optimized for your devices' width.
+      <span class="portrait-only">
+        Please consider using it in landscape mode or select a device with larger screen size.
+      </span>
+      <span class="landscape-only">
+        Please consider using a device with larger screen size.
+      </span>
+    </p>
+    <p>
+      <a href="javascript:void(0);" class="device-notice__confirm">Got it!</a>
+    </p>
+  </div>
+</div>
 
 <script src="assets/js/main.js"></script>
 </body>

@@ -1,0 +1,59 @@
+/*!
+ * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
+ */
+
+.device-notice {
+  .device-notice-confirmed & {
+    display: none !important;
+  }
+
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $device-notice-background;
+  z-index: z(device-notice);
+
+  @include breakpoint($device-notice-breakpoint down) {
+    display: initial;
+  }
+
+  &__message {
+    position: fixed;
+    top: 50%;
+    right: 2em;
+    left: 2em;
+    transform: translateY(-50%);
+    background: $device-notice-message-background;
+    color: $device-notice-message-color;
+    padding: $device-notice-message-padding;
+    line-height: $device-notice-message-line-height;
+    user-select: none;
+
+    p {
+      margin-top: 1em;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__confirm {
+    display: inline-block;
+    background: $device-notice-confirm-background;
+    color: $device-notice-confirm-color;
+    border-radius: $device-notice-confirm-border-radius;
+    padding: $device-notice-confirm-padding;
+    transition: background $transition;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: $device-notice-confirm-background-hover;
+      color: $device-notice-confirm-color-hover;
+    }
+  }
+}

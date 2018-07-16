@@ -1,0 +1,20 @@
+/*!
+ * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
+ */
+
+.landscape-only,
+.portrait-only {
+  display: none;
+}
+
+@media screen and (orientation: landscape) {
+  .landscape-only {
+    display: initial;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .portrait-only {
+    display: initial;
+  }
+}

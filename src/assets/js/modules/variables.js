@@ -54,6 +54,12 @@ module.exports = {
   CHART_SELECTOR: ".visualization__chart",
 
   /**
+   * Minimum device width which is necessary to place both map and chart next to each other
+   * @type {number}
+   */
+  MINIMUM_DESKTOP_WIDTH: 1200,
+
+  /**
    * Geometrical center of Germany
    * @type {number[]}
    */
@@ -72,9 +78,33 @@ module.exports = {
   GEO_KEY_NAME: "NAME_1",
 
   /**
+   * Key of semester name inside CSV file
+   * @type {string}
+   */
+  DATA_KEY_SEMESTER: "",
+
+  /**
    * Default fallback color for states
    * @type {string}
    */
-  STATE_DEFAULT_COLOR: "#aaa"
+  STATE_DEFAULT_COLOR: "#aaa",
+
+  /**
+   * CSS selector for device notice confirm button
+   * @type {string}
+   */
+  DEVICE_NOTICE_CONFIRM_SELECTOR: ".device-notice__confirm",
+
+  /**
+   * Class to describe the confirmation of the device notice
+   * @type {string}
+   */
+  DEVICE_NOTICE_CONFIRMED_CLASS: "device-notice-confirmed",
+
+  /**
+   * Cookie name of the device confirmation
+   * @type {string}
+   */
+  DEVICE_NOTICE_COOKIE: "device-notice-confirm"
 
 };

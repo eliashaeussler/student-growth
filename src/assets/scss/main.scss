@@ -6,8 +6,10 @@
 // noinspection CssUnknownTarget (source path included by Gulp)
 @import '_reset.scss';
 
-// Functions
+// Helpers
 @import 'modules/functions';
+@import 'modules/mixins';
+@import 'modules/device';
 
 // Variables
 @import 'modules/variables';
@@ -15,7 +17,7 @@
 // Partials
 @import 'partials/general';
 @import 'partials/code';
-@import 'partials/grid';
+@import 'partials/device-notice';
 @import 'partials/input';
 @import 'partials/link';
 @import 'partials/page';
