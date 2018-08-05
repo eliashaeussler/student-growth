@@ -9,7 +9,7 @@
  * years. The class is also used to initialize the visualization. It serves as interface and data collector/provider
  * between visualization classes and functions.
  */
-export class Data
+export class Controller
 {
   /**
    * Read data information and initialize map and chart visualization.
@@ -54,7 +54,7 @@ export class Data
   initSpinner()
   {
     // Hide page
-    Data.hidePage();
+    Controller.hidePage();
 
     // Markup from Spinkit
     let spinner = `<div class="sk-wave">
@@ -128,17 +128,17 @@ export class Data
         }
 
         // Check if cookie for device-notice is set
-        Data.initDeviceNotice();
+        Controller.initDeviceNotice();
 
         // Start visualization, then hide spinner
         $.when(
           this.map.data(this.dataFile),
           this.chart.data(this.dataFile),
           this.update()
-        ).done(Data.closeFullscreen);
+        ).done(Controller.closeFullscreen);
 
         // Add event for confirm button of device notice
-        $(Global.DEVICE_NOTICE_CONFIRM_SELECTOR).on('click', () => { Data.hideDeviceNotice(); });
+        $(Global.DEVICE_NOTICE_CONFIRM_SELECTOR).on('click', () => { Controller.hideDeviceNotice(); });
 
         // Change document title
         document.title = `${document.title}: ${data.title}`;
@@ -181,12 +181,12 @@ export class Data
         $('main').hide();
 
         // Hide spinner
-        Data.closeFullscreen();
+        Controller.closeFullscreen();
       })
       .always(() =>
       {
         // Show page
-        Data.showPage();
+        Controller.showPage();
       });
   }
 

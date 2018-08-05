@@ -21,7 +21,7 @@ window.d3 = Object.assign({},
 window.Global = require('./modules/variables');
 
 // Load classes
-let { Data } = require('./partials/data');
+let { Controller } = require('./partials/controller');
 let { VisualizationMap } = require('./partials/map');
 let { Chart } = require('./partials/chart');
 
@@ -32,4 +32,4 @@ let chart = new Chart().init();
 let map = new VisualizationMap().geo(Global.GEO_FILE).chart(chart);
 
 // Get data and update visualization
-new Data(map, chart);
+new Controller(map, chart);
