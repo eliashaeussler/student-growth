@@ -111,13 +111,32 @@ export class Controller
         });
 
         // Register Change events for visualization options
-        for (let key of attributes)
-        {
+        for (let key of attributes) {
           $(`.controls__${key}`).on('change', () => { this.update(); });
         }
 
         // Check if cookie for device-notice is set
         Controller.initDeviceNotice();
+
+        // Check if settings are defined inside URL
+        let settingsByUrl = Controller.getSettingsByUrlFragments();
+        for (let setting of Object.keys(settingsByUrl))
+        {
+          let value = settingsByUrl[setting];
+          if (value === null) break;
+          let $selectField = $(`.controls__${setting}`);
+          if (!$selectField.length) break;
+
+          // Find value for normalized string of semester
+          if (setting === "semester") {
+            value = Controller.findValueByNormalizedString($selectField, value);
+          }
+
+          // Set selection for selected value
+          if ($selectField.find(`option[value="${value}"]`).length) {
+            $selectField.val(value);
+          }
+        }
 
         // Start visualization, then hide spinner
         $.when(
@@ -198,6 +217,9 @@ export class Controller
 
     // Render map
     this.map.render();
+
+    // Update URL path
+    Controller.updateUrl(nationality, sex, key_y);
   }
 
   /**
@@ -260,5 +282,125 @@ export class Controller
 
     // Add class to hide device notice
     $('body').addClass(Global.DEVICE_NOTICE_CONFIRMED_CLASS);
+  }
+
+  /**
+   * Update page URL with given settings from controls.
+   *
+   * Adds the selected options from controls as fragments to the current page URL. This enables sharing the current
+   * setting with others.
+   *
+   * @param nationality Selected value for nationality
+   * @param sex Selected value for sex
+   * @param semester Selected value for semester
+   */
+  static updateUrl(nationality, sex, semester)
+  {
+    // Generate URI-encoded strings
+    nationality = Controller.encodeUrlFragment(nationality);
+    sex = Controller.encodeUrlFragment(sex);
+    semester = Controller.encodeUrlFragment(Controller.getNormalizedString(semester));
+
+    // Replace current URL with fragments of selected values
+    window.history.replaceState(null, document.title, `/#!/${nationality}/${sex}/${semester}`);
+  }
+
+  /**
+   * Read settings by current URL.
+   *
+   * Reads the settings which are provided through fragments of the current URL and returns them as object. If at least
+   * one setting is not defined within the URL, all values inside the object will be NULL.
+   *
+   * @returns {{nationality: string|null, sex: string|null, semester: string|null}}
+   */
+  static getSettingsByUrlFragments()
+  {
+    let settings = {
+      nationality: null,
+      sex: null,
+      semester: null
+    };
+
+    // Read URL fragments and decode them to create usable values
+    let hash = document.location.hash.substr(3);
+    if (hash) {
+      let fragments = hash.split('/');
+      if (fragments && fragments.length >= 3) {
+        settings.nationality = this.decodeUrlFragment(fragments[0].trim());
+        settings.sex = this.decodeUrlFragment(fragments[1].trim());
+        settings.semester = this.decodeUrlFragment(fragments[2].trim());
+      }
+    }
+
+    return settings;
+  }
+
+  /**
+   * URI-encode a URL fragment.
+   *
+   * @param fragment The fragment which should be URI-encoded
+   * @returns {*} The URI-encoded fragment
+   */
+  static encodeUrlFragment(fragment)
+  {
+    if (!fragment) return fragment;
+    return encodeURI(fragment.replace('/', '-'));
+  }
+
+  /**
+   * URI-decode a URL fragment.
+   *
+   * @param fragment The URI-encoded fragment which should be URI-decoded
+   * @returns string The URI-decoded fragment
+   */
+  static decodeUrlFragment(fragment)
+  {
+    if (!fragment) return fragment;
+    return decodeURI(fragment).replace('-', '/');
+  }
+
+  /**
+   * Create normalized string by a given value.
+   *
+   * Creates a normalized string by a given value by removing all characters until the first space.
+   *
+   * @param string The string which should be normalized
+   * @returns string The normalized string
+   */
+  static getNormalizedString(string)
+  {
+    if (!string) return string;
+    return string.replace(/^(.*?)\s/g, '');
+  }
+
+  /**
+   * Check whether inside a select field an option with a given normalized value exists.
+   *
+   * Checks all options of a given select field for the occurrence of a given normalized string. For this, all option
+   * values within the given selected field will be normalized and compared with the given normalized string. If any
+   * normalized option value matches the given normalized string, its real value will be returned. Otherwise, the return
+   * value equals the given normalized string.
+   *
+   * @param $selectField jQuery select field which should contain an option with matching normalized string value
+   * @param normalizedString The normalized string to search for inside the given select field's options
+   * @returns string The real value of an option whose normalized value matches the given normalized string;
+   *                 or the normalized string if no normalized option value matches the given string
+   */
+  static findValueByNormalizedString($selectField, normalizedString)
+  {
+    if (!$selectField.length) return normalizedString;
+
+    // Check if any normalized option value matches the given normalized string
+    let value = normalizedString;
+    $selectField.find('option').each(function() {
+      let currentValue = $(this).val();
+      let normalizedValue = Controller.getNormalizedString(currentValue);
+      if (normalizedValue === normalizedString) {
+        value = currentValue;
+        return false;
+      }
+    });
+
+    return value;
   }
 }
