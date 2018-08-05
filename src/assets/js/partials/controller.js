@@ -42,7 +42,7 @@ export class Controller
     this.dataFile = "";
 
     // Initialize spinner, get data information and render map and chart
-    this.initSpinner();
+    Controller.initSpinner();
     this.getDataInformation();
   }
 
@@ -51,7 +51,7 @@ export class Controller
    *
    * Initializes and renders a spinner which demonstrates the load state of both visualizations.
    */
-  initSpinner()
+  static initSpinner()
   {
     // Hide page
     Controller.hidePage();
