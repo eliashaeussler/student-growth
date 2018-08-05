@@ -13,7 +13,6 @@ The project is based on the [D3](https://github.com/d3/d3) library and developed
 ## Requirements
 
 * `yarn` or `npm` to install the required packages
-* [`gulp-cli`](https://github.com/gulpjs/gulp-cli) to build and run the project
 * [Python 3.5](https://www.python.org/) in case you want to download the latest data
 
 
@@ -73,7 +72,7 @@ for changes.
 | NPM script | Gulp task | Description |
 | ---------- | --------- | ----------- |
 | `sources` | `default --production` | Build only the source files and does not start the server |
-| `server` | `server` | Run the server without creating any source files |
+| `serve` | `serve` | Run the server without creating any source files |
 | `watch` | `server watch` | Run the server without creating source files and watch for changes |
 
 All NPM scripts need to be executed using `yarn run <command>` or `npm run-script <command>`.

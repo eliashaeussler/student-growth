@@ -187,7 +187,7 @@ gulp.task('default', !PRODUCTION
 );
 
 // Server Task
-gulp.task('server', server);
+gulp.task('serve', server);
 
 // Watch Task
 gulp.task('watch', watch);
