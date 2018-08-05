@@ -4,10 +4,11 @@
   "description": "Visualization about student growth in Germany",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "./node_modules/.bin/gulp",
     "build": "./node_modules/.bin/gulp --production && ./node_modules/.bin/gulp serve",
-    "sources": "./node_modules/.bin/gulp --production",
     "serve": "./node_modules/.bin/gulp serve",
+    "sources": "./node_modules/.bin/gulp --production",
+    "start": "./node_modules/.bin/gulp",
+    "test": "./node_modules/.bin/gulp --production && ./node_modules/.bin/gulp",
     "watch": "./node_modules/.bin/gulp serve && ./node_modules/.bin/gulp watch"
   },
   "repository": "https://github.com/eliashaeussler/student-growth",
