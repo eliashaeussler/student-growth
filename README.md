@@ -7,7 +7,7 @@
 A JavaScript-based project demonstrating the student growth in Germany in the past 20 years. It uses data from the
 [Federal Statistical Office of Germany](https://www.destatis.de/EN/Homepage.html).
 
-The project is based on the [D3](https://github.com/d3/d3) library and developed with [Gulp](https://github.com/gulpjs/gulp).
+The project is based on the [D3 library](https://github.com/d3/d3) and developed with [Gulp](https://github.com/gulpjs/gulp).
 
 
 ## Requirements
@@ -69,13 +69,13 @@ for changes.
 
 ### Other tasks
 
-| NPM script | Gulp task | Description |
+| `npm` script | Gulp task | Description |
 | ---------- | --------- | ----------- |
 | `sources` | `default --production` | Build only the source files and does not start the server |
 | `serve` | `serve` | Run the server without creating any source files |
 | `watch` | `server watch` | Run the server without creating source files and watch for changes |
 
-All NPM scripts need to be executed using `yarn run <command>` or `npm run-script <command>`.
+All `npm` scripts need to be executed using `yarn run <command>` or `npm run-script <command>`.
 When running Gulp tasks, execute them using `gulp <command>`.
 
 
