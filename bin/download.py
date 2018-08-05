@@ -91,7 +91,11 @@ def get_information(url: str) -> object:
     return {
         "title": data['title'],
         "author": data['author'],
-        "data_url": data_url
+        "data_url": data_url,
+        "license": {
+            "title": data['license_title'],
+            "url": data['license_url']
+        }
     }
 
 
@@ -212,7 +216,8 @@ def save_information(info: object, file: str, keys: object):
             "sex": sex,
             "state": state,
             "semester": semester
-        }
+        },
+        "license": info['license']
     }
 
     # Write data to json file

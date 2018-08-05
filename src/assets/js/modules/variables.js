@@ -54,6 +54,12 @@ module.exports = {
   CHART_SELECTOR: ".visualization__chart",
 
   /**
+   * CSS selector for output of license
+   * @type {string}
+   */
+  LICENSE_SELECTOR: ".page-footer__license",
+
+  /**
    * Minimum device width which is necessary to place both map and chart next to each other
    * @type {number}
    */

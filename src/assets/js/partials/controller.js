@@ -150,6 +150,9 @@ export class Controller
 
         // Change document title
         document.title = `${document.title}: ${data.title}`;
+
+        // Show license information
+        Controller.showLicense(data.license);
       })
       .fail(() =>
       {
@@ -282,6 +285,28 @@ export class Controller
 
     // Add class to hide device notice
     $('body').addClass(Global.DEVICE_NOTICE_CONFIRMED_CLASS);
+  }
+
+  /**
+   * Show license of the provided data.
+   *
+   * Shows the license of the provided data in the footer since this is necessary when working with the provided data.
+   * The license parameter should at least contain a title, but it's also possible to provide a URL to the license.
+   *
+   * @param license Object which contains title and URL (optional) to the given license
+   */
+  static showLicense(license)
+  {
+    if (!license.title) return;
+
+    let output = " &middot; License: ";
+    if (license.url) {
+      output += `<a href="${license.url}" target="_blank">${license.title}</a>`;
+    } else {
+      output += license.title;
+    }
+
+    $(Global.LICENSE_SELECTOR).html(output);
   }
 
   /**
