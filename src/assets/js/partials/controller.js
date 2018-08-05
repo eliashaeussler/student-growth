@@ -35,12 +35,6 @@ export class Controller
      */
     this.chart = chart;
 
-    /**
-     * Reference to CSV data source file
-     * @type {string}
-     */
-    this.dataFile = "";
-
     // Initialize spinner, get data information and render map and chart
     Controller.initSpinner();
     this.getDataInformation();
@@ -85,11 +79,6 @@ export class Controller
     })
       .done(data =>
       {
-        this.data = data;
-
-        // Set data file
-        this.dataFile = data.file;
-
         // Display data information
         $(Global.DATA_INFO_SELECTOR).html
         (
@@ -132,8 +121,8 @@ export class Controller
 
         // Start visualization, then hide spinner
         $.when(
-          this.map.data(this.dataFile),
-          this.chart.data(this.dataFile),
+          this.map.data(data.file),
+          this.chart.data(data.file),
           this.update()
         ).done(Controller.closeFullscreen);
 
