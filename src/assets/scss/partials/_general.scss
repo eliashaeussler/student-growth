@@ -2,13 +2,10 @@
  * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
  */
 
-* {
-  outline: none;
-}
-
 body {
-  font-family: $font-family-sans-serif;
+  outline: none;
   background: $white;
+  font-family: $font-family-sans-serif;
 }
 
 strong {
@@ -19,8 +16,8 @@ strong {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   z-index: z(fullscreen);
   background: $white;
+  width: 100%;
+  height: 100%;
 }

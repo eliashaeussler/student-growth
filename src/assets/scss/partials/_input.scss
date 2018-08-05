@@ -4,23 +4,23 @@
 
 button,
 select {
-  font-family: $font-family-sans-serif;
-  font-size: $input-font-size;
-  background: $input-background;
-  padding: $input-padding;
   border: $input-border;
-  border-radius: $input-border-radius;
   border-bottom: {
     width: 1px;
     style: dotted;
   }
+  border-radius: $input-border-radius;
+  background: $input-background;
   cursor: pointer;
+  padding: $input-padding;
+  font-family: $font-family-sans-serif;
+  font-size: $input-font-size;
 }
 
 button {
+  transition: color $transition, text-shadow $transition;
   border-bottom-color: $button-border-color;
   color: $button-color;
-  transition: color $transition, text-shadow $transition;
 
   &:hover,
   &:active,
@@ -35,9 +35,9 @@ button {
 }
 
 select {
-  appearance: none;
+  transition: background $transition, box-shadow $transition;
   margin: 0 0.2em;
   border-bottom-color: $select-border-color;
+  appearance: none;
   text-align-last: $select-text-align;
-  transition: background $transition, box-shadow $transition;
 }

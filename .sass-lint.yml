@@ -1,0 +1,93 @@
+files:
+  include: '**/*.s+(a|c)ss'
+
+options:
+  formatter: stylish
+  merge-default-rules: false
+
+rules:
+  bem-depth:
+    - 2
+    -
+      max-depth: 1
+  border-zero:
+    - 1
+    -
+      convention: '0'
+  brace-style:
+    - 1
+    -
+      allow-single-line: false
+  class-name-format:
+    - 1
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedbem
+  clean-import-paths:
+    - 2
+    -
+      leading-underscore: false
+      filename-extension: false
+  declarations-before-nesting: 1
+  force-attribute-nesting: 0
+  force-element-nesting: 0
+  force-pseudo-nesting: 0
+  function-name-format:
+    - 1
+    -
+      convention: hyphenatedlowercase
+  hex-notation:
+    - 1
+    -
+      style: lowercase
+  indentation:
+    - 2
+    -
+      size: 2
+  leading-zero: 0
+  mixin-name-format:
+    - 1
+    -
+      convention: hyphenatedlowercase
+  mixins-before-declarations:
+    - 1
+    -
+      exclude: ['breakpoint', 'mq']
+  nesting-depth:
+    - 2
+    -
+      max-depth: 3
+  no-color-keywords: 1
+  no-debug: 2
+  no-extends: 2
+  no-ids: 1
+  no-important: 2
+  no-invalid-hex: 1
+  no-misspelled-properties: 1
+  no-qualifying-elements: 0
+  no-trailing-whitespace: 0
+  no-trailing-zero: 2
+  no-transition-all: 2
+  no-universal-selectors: 2
+  no-vendor-prefixes: 1
+  no-warn: 0
+  one-declaration-per-line: 1
+  property-sort-order:
+    - 1
+    -
+      order: concentric
+  property-units:
+    - 1
+    -
+      global: ['em', 'px', 'rem', '%']
+  pseudo-element: 1
+  quotes:
+    - 1
+    -
+      style: double
+  single-line-per-selector: 1
+  variable-name-format:
+    - 1
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedlowercase

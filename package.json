@@ -41,6 +41,7 @@
     "gulp-jshint": "^2.1.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-sass": "^4.0.1",
+    "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
     "jshint": "^2.9.5",
     "rimraf": "^2.6.2",

@@ -2,6 +2,7 @@
  * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
  */
 
+// jshint node: true
 'use strict';
 
 import plugins from 'gulp-load-plugins';
@@ -64,6 +65,18 @@ const PRODUCTION = !!(yargs.argv.production);
 const $ = plugins();
 
 /**
+ * SCSS Lint task
+ * @returns {*}
+ */
+let sass_lint = () =>
+{
+  return gulp.src(PATHS.sass.all)
+    .pipe($.sassLint())
+    .pipe($.sassLint.format())
+    .pipe($.sassLint.failOnError());
+};
+
+/**
  * Compile Sass
  * @returns {*}
  */
@@ -92,7 +105,7 @@ let sass = () =>
  * JavaScript Lint task
  * @returns {*}
  */
-let lint = () =>
+let js_lint = () =>
 {
   return gulp.src(PATHS.javascript.all)
     .pipe($.jshint())
@@ -170,21 +183,18 @@ let reload = done =>
 let watch = () =>
 {
   gulp.watch(PATHS.data, gulp.series(copy, reload));
-  gulp.watch(PATHS.javascript.all, gulp.series(lint, javascript, reload));
-  gulp.watch(PATHS.sass.all, gulp.series(sass, reload));
+  gulp.watch(PATHS.javascript.all, gulp.series(js_lint, javascript, reload));
+  gulp.watch(PATHS.sass.all, gulp.series(sass_lint, sass, reload));
   gulp.watch(PATHS.pages, gulp.series(pages, reload));
 };
 
 /**
  * Build the dist folder
  */
-let build = gulp.series(clean, gulp.parallel(copy, lint, sass, javascript, pages));
+let build = gulp.series(clean, gulp.parallel(copy, sass_lint, sass, js_lint, javascript, pages));
 
 // Default Task
-gulp.task('default', !PRODUCTION
-  ? gulp.series(build, server, watch)
-  : gulp.series(build)
-);
+gulp.task('default', !PRODUCTION ? gulp.series(build, server, watch) : gulp.series(build));
 
 // Server Task
 gulp.task('serve', server);

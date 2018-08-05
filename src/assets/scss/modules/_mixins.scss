@@ -8,8 +8,8 @@ $breakpoints: (
   large: 1440
 );
 
-@mixin breakpoint($configuration)
-{
+@mixin breakpoint($configuration) {
+
   // Get breakpoint and direction (default direction is "up")
   $direction: up;
   $breakpoint: null;

@@ -3,27 +3,29 @@
  */
 
 // Reset CSS
+// sass-lint:disable clean-import-paths
 // noinspection CssUnknownTarget (source path included by Gulp)
-@import '_reset.scss';
+@import "_reset";
+// sass-lint:enable clean-import-paths
 
 // Helpers
-@import 'modules/functions';
-@import 'modules/mixins';
-@import 'modules/device';
+@import "modules/functions";
+@import "modules/mixins";
+@import "modules/device";
 
 // Variables
-@import 'modules/variables';
+@import "modules/variables";
 
 // Partials
-@import 'partials/general';
-@import 'partials/code';
-@import 'partials/device-notice';
-@import 'partials/input';
-@import 'partials/link';
-@import 'partials/page';
-@import 'partials/spinner';
-@import 'partials/visualization';
+@import "partials/general";
+@import "partials/code";
+@import "partials/device-notice";
+@import "partials/input";
+@import "partials/link";
+@import "partials/page";
+@import "partials/spinner";
+@import "partials/visualization";
 
 // Third party modules
 // noinspection CssUnknownTarget (source path included by Gulp)
-@import 'spinners/3-wave';
+@import "spinners/3-wave";

@@ -25,8 +25,8 @@
   }
   
   &__controls {
-    text-align: center;
     margin-bottom: 1em;
+    text-align: center;
   }
 
   &__map,
@@ -46,9 +46,9 @@
     }
 
     svg {
+      transition: visibility $transition, opacity $transition;
       visibility: hidden;
       opacity: 0;
-      transition: visibility $transition, opacity $transition;
     }
 
     .chart {
@@ -69,18 +69,14 @@
         path,
         line {
           shape-rendering: crispEdges;
-        }
-
-        path,
-        line {
           fill: $chart-axis-background;
           stroke: $chart-axis-color;
         }
       }
 
       &__text {
-        fill: $chart-text-color;
         font-size: 1em;
+        fill: $chart-text-color;
 
         &--active {
           fill: $chart-text-color-active;
@@ -103,10 +99,10 @@
       }
 
       &__dot {
+        z-index: z(chart__dot);
         fill: $chart-dot-background;
         stroke: $chart-dot-border-color;
         stroke-width: $chart-dot-border-width;
-        z-index: z(chart__dot);
 
         &--active {
           fill: $chart-dot-background-active;
@@ -119,24 +115,24 @@
     .map {
       &__tooltip {
         position: absolute;
+        transform: translate(-50%, -100%);
         z-index: z(map__tooltip);
-        background: $map-tooltip-background;
         border-radius: $map-tooltip-border-radius;
+        background: $map-tooltip-background;
+        padding: 0.7em 1em;
+        text-align: center;
         color: $map-tooltip-color;
         font-size: 0.7em;
-        text-align: center;
-        padding: 0.7em 1em;
-        transform: translate(-50%, -100%);
 
         div {
-          font-size: 1.3em;
           margin-bottom: 0.5em;
+          font-size: 1.3em;
         }
       }
 
       &__path {
-        stroke: $map-path-color;
         cursor: $map-path-cursor;
+        stroke: $map-path-color;
 
         &:hover {
           fill-opacity: $map-path-opacity-hover;

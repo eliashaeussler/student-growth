@@ -3,18 +3,18 @@
  */
 
 .device-notice {
-  .device-notice-confirmed & {
-    display: none !important;
-  }
-
   display: none;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: z(device-notice);
+  background: $device-notice-background;
   width: 100%;
   height: 100%;
-  background: $device-notice-background;
-  z-index: z(device-notice);
+
+  .device-notice-confirmed & {
+    display: none;
+  }
 
   @include breakpoint($device-notice-breakpoint down) {
     display: initial;
@@ -27,9 +27,9 @@
     left: 2em;
     transform: translateY(-50%);
     background: $device-notice-message-background;
-    color: $device-notice-message-color;
     padding: $device-notice-message-padding;
     line-height: $device-notice-message-line-height;
+    color: $device-notice-message-color;
     user-select: none;
 
     p {
@@ -43,11 +43,11 @@
 
   &__confirm {
     display: inline-block;
-    background: $device-notice-confirm-background;
-    color: $device-notice-confirm-color;
-    border-radius: $device-notice-confirm-border-radius;
-    padding: $device-notice-confirm-padding;
     transition: background $transition;
+    border-radius: $device-notice-confirm-border-radius;
+    background: $device-notice-confirm-background;
+    padding: $device-notice-confirm-padding;
+    color: $device-notice-confirm-color;
 
     &:hover,
     &:active,

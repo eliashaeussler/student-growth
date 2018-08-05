@@ -3,9 +3,9 @@
  */
 
 a {
+  transition: color $transition;
   text-decoration: none;
   color: $link-color;
-  transition: color $transition;
 
   &:hover,
   &:active,
