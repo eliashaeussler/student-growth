@@ -1,5 +1,6 @@
 [![license](https://img.shields.io/github/license/eliashaeussler/student-growth.svg)](LICENSE.md)
 [![release](https://img.shields.io/github/release/eliashaeussler/student-growth.svg)](https://github.com/eliashaeussler/student-growth/releases/)
+[![StyleCI](https://github.styleci.io/repos/132896060/shield?branch=master)](https://github.styleci.io/repos/132896060)
 
 
 # Student growth
