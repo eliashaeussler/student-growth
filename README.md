@@ -14,7 +14,7 @@ The project is based on the [D3 library](https://github.com/d3/d3) and developed
 ## Requirements
 
 * `yarn` or `npm` to install the required packages
-* [Python 3.5](https://www.python.org/) in case you want to download the latest data
+* [Python 3.6](https://www.python.org/) in case you want to download the latest data
 
 
 ## Installation
