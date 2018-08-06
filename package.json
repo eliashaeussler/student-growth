@@ -8,7 +8,7 @@
     "serve": "./node_modules/.bin/gulp serve",
     "sources": "./node_modules/.bin/gulp --production",
     "start": "./node_modules/.bin/gulp",
-    "test": "./node_modules/.bin/gulp --production && ./node_modules/.bin/gulp",
+    "test": "./node_modules/.bin/gulp --production",
     "watch": "./node_modules/.bin/gulp serve && ./node_modules/.bin/gulp watch"
   },
   "repository": "https://github.com/eliashaeussler/student-growth",

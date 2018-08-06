@@ -1,7 +1,12 @@
-language: node_js
-node_js:
-  - "6"
-cache:
-  yarn: true
-  directories:
-    - node_modules
+matrix:
+  include:
+    - language: python
+      python: "3.5"
+      script:
+        - "./bin/download.py"
+    - language: node_js
+      node_js: "stable"
+      cache:
+        yarn: true
+        directories:
+          - node_modules
