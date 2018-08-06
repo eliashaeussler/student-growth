@@ -12,6 +12,9 @@ A JavaScript-based project demonstrating the student growth in Germany in the pa
 The project is based on the [D3 library](https://github.com/d3/d3) and developed with [Gulp](https://github.com/gulpjs/gulp).
 
 
+![Screenshot](images/screen.png)
+
+
 ## Requirements
 
 * `yarn` or `npm` to install the required packages
