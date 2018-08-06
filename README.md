@@ -76,6 +76,7 @@ for changes.
 | `sources` | `default --production` | Build only the source files and does not start the server |
 | `serve` | `serve` | Run the server without creating any source files |
 | `watch` | `server watch` | Run the server without creating source files and watch for changes |
+| `test` | – | Test the project (does not start the server) |
 
 All `npm` scripts need to be executed using `yarn run <command>` or `npm run-script <command>`.
 When running Gulp tasks, execute them using `gulp <command>`.
