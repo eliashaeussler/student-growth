@@ -19,6 +19,7 @@ DATA_DIR: str = "data"
 DATA_FILENAME: str = "data.csv"
 INFO_FILENAME: str = "info.json"
 SOURCE_FILE: str = "data/source.json"
+CSV_DELIMITER: str = ";"
 
 MESSAGE_INFO: int = 0
 MESSAGE_ERROR: int = -1
@@ -124,11 +125,22 @@ def download(url: str, keys: object, data_rows: object) -> object:
     for _ in keys['x']:
         keys_y.append([])
 
+    # Initialize reader
+    cr = csv.reader(codecs.iterdecode(res, "ISO-8859-1"), delimiter=CSV_DELIMITER)
+
+    # Test if CSV file is valid
+    if not args.unsafe:
+        try:
+            csv.Sniffer().sniff(str([row for row in cr][0]), delimiters=CSV_DELIMITER)
+        except csv.Error:
+            message("The requested CSV file is invalid. Please try again in a few minutes." + "\n" +
+                    "Resource: {}", MESSAGE_ERROR, url)
+            sys.exit(0)
+
     # Read and write file contents
     with open(file, "w+") as outfile:
 
-        # Initialize reader and writer
-        cr = csv.reader(codecs.iterdecode(res, "ISO-8859-1"), delimiter=";")
+        # Initialize writer
         cw = csv.writer(outfile)
 
         # Get file contents
@@ -309,6 +321,7 @@ def unique(elements: list) -> list:
 # Initialize arguments
 parser = ArgumentParser()
 parser.add_argument('-q', '--quiet', help="Disable output of status messages", action='store_true')
+parser.add_argument('-u', '--unsafe', help="Skip CSV file check", action='store_true')
 args = parser.parse_args()
 
 # Execute main script

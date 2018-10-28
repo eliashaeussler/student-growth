@@ -119,6 +119,7 @@ You can pass additional arguments when calling the download script. Run `python3
 | Parameter | Description |
 | --- | --- |
 | `-q`, `--quiet` | Suppresses status messages (error messages will still be displayed) |
+| `-u`, `--unsafe` | Skip integrity check of requested CSV file |
 
 ### Installing certificates on macOS
 
