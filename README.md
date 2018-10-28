@@ -112,6 +112,14 @@ The file `data/source.json` contains important information which are being used 
 | `keys` | Position of keys (headlines) inside the source file (X and Y) | Object with keys `x` and `y` which contain arrays with numbers |
 | `data_rows` | Position of first and last data row | Object with keys `first` and `last` as numbers. `last` can be a row number (e.g. `293`) or the difference from the last available row (e.g. `-4`, more flexible)
 
+### Script parameters
+
+You can pass additional arguments when calling the download script. Run `python3 bin/download.py -h` to get an overview.
+
+| Parameter | Description |
+| --- | --- |
+| `-q`, `--quiet` | Suppresses status messages (error messages will still be displayed) |
+
 ### Installing certificates on macOS
 
 If you are working with macOS, you might run into trouble when running the python script. You might get an output like this:

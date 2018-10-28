@@ -7,7 +7,7 @@ import os
 import sys
 import urllib.request
 import urllib.error
-
+from argparse import ArgumentParser
 
 CEND: str = '\033[0m'
 CYELLOW: str = '\33[33m'
@@ -42,7 +42,7 @@ def main():
         sys.exit(0)
 
     # Print data information
-    message("Downloading: {} ...", MESSAGE_INFO, info['title'], )
+    message("Downloading: {} ...", MESSAGE_INFO, info['title'])
 
     # Write contents of downloaded file
     dl = download(info['data_url'], source['keys'], source['data_rows'])
@@ -256,17 +256,17 @@ def get_source() -> object:
     }
 
 
-def message(text: str, state: int, *args: str):
+def message(text: str, state: int, *arguments: str):
     """
     Print message to console
 
     :param text: The message text
     :param state: The message state; can be MESSAGE_INFO, MESSAGE_SUCCESS or MESSAGE_ERROR
-    :param args: Additional arguments which replace each {} inside the message text
+    :param arguments: Additional arguments which replace each {} inside the message text
     :return:
     """
 
-    if not text or state not in [MESSAGE_INFO, MESSAGE_ERROR, MESSAGE_SUCCESS]:
+    if not text or state not in [MESSAGE_INFO, MESSAGE_ERROR, MESSAGE_SUCCESS] or (args.quiet and state != MESSAGE_ERROR):
         return
 
     # Set message prefix and styles
@@ -287,7 +287,7 @@ def message(text: str, state: int, *args: str):
         arg_color = CGREEN
 
     # Show message
-    print((colors['start'] + prefix + text + colors['end']).format(*[arg_color + arg + CEND for arg in args]))
+    print((colors['start'] + prefix + text + colors['end']).format(*[arg_color + arg + CEND for arg in arguments]))
 
 
 def unique(elements: list) -> list:
@@ -306,4 +306,10 @@ def unique(elements: list) -> list:
 
 # ======================================================================================================================
 
+# Initialize arguments
+parser = ArgumentParser()
+parser.add_argument('-q', '--quiet', help="Disable output of status messages", action='store_true')
+args = parser.parse_args()
+
+# Execute main script
 main()
