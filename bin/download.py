@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import codecs
 import csv
 import json
 import os
@@ -118,6 +117,7 @@ def download(url: str, keys: object, data_rows: object) -> object:
     # Open url
     file = path + "/" + DATA_FILENAME
     res = urllib.request.urlopen(url)
+    contents = res.read().decode("ISO-8859-1")
 
     # Init lists which contain the keys
     keys_x = []
@@ -125,17 +125,17 @@ def download(url: str, keys: object, data_rows: object) -> object:
     for _ in keys['x']:
         keys_y.append([])
 
-    # Initialize reader
-    cr = csv.reader(codecs.iterdecode(res, "ISO-8859-1"), delimiter=CSV_DELIMITER)
-
     # Test if CSV file is valid
     if not args.unsafe:
         try:
-            csv.Sniffer().sniff(str([row for row in cr][0]), delimiters=CSV_DELIMITER)
+            csv.Sniffer().sniff(contents, delimiters=CSV_DELIMITER)
         except csv.Error:
             message("The requested CSV file is invalid. Please try again in a few minutes." + "\n" +
                     "Resource: {}", MESSAGE_ERROR, url)
             sys.exit(0)
+
+    # Initialize reader
+    cr = csv.reader(contents.split("\n"), delimiter=CSV_DELIMITER)
 
     # Read and write file contents
     with open(file, "w+") as outfile:
