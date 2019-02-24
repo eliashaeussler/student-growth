@@ -38,25 +38,25 @@ def main():
         info = get_information(source['url'])
 
     except urllib.error.URLError:
-        message("There is probably no active internet connection.", MESSAGE_ERROR)
+        message("There is probably no active internet connection.", state=MESSAGE_ERROR)
         sys.exit(0)
 
     # Print data information
     message("Downloading: {} ...", MESSAGE_INFO, info['title'])
 
     # Write contents of downloaded file
-    dl = download(info['data_url'], source['keys'], source['data_rows'])
+    dl = download(info['data_url'], keys=source['keys'], data_rows=source['data_rows'])
 
     if dl:
         # Save information in file
-        save_information(info, dl['file'], dl['keys'])
+        save_information(info, file=dl['file'], keys=dl['keys'])
 
         # Print download result
         message("Download successful: {}", MESSAGE_SUCCESS, SOURCE_DIR + "/" + dl['file'])
 
     else:
         # Download not successful
-        message("Download failed.", MESSAGE_ERROR)
+        message("Download failed.", state=MESSAGE_ERROR)
 
 
 def get_information(url: str) -> object:
@@ -85,7 +85,7 @@ def get_information(url: str) -> object:
         data_url
 
     except NameError:
-        message("No CSV file found in the specified source.", MESSAGE_ERROR)
+        message("No CSV file found in the specified source.", state=MESSAGE_ERROR)
         sys.exit(0)
 
     return {
@@ -138,7 +138,7 @@ def download(url: str, keys: object, data_rows: object) -> object:
     cr = csv.reader(contents.split("\n"), delimiter=CSV_DELIMITER)
 
     # Read and write file contents
-    with open(file, "w+") as outfile:
+    with open(file, mode="w+") as outfile:
 
         # Initialize writer
         cw = csv.writer(outfile)
@@ -233,7 +233,7 @@ def save_information(info: object, file: str, keys: object):
     }
 
     # Write data to json file
-    with open(SOURCE_DIR + "/" + DATA_DIR + "/" + INFO_FILENAME, "w+", encoding="utf-8") as outfile:
+    with open(SOURCE_DIR + "/" + DATA_DIR + "/" + INFO_FILENAME, mode="w+", encoding="utf-8") as outfile:
         json.dump(data, outfile)
 
 
@@ -255,10 +255,10 @@ def get_source() -> object:
 
     # Check validity of data rows
     if data_rows['last'] == 0:
-        message("The last data row cannot be 0.", MESSAGE_ERROR)
+        message("The last data row cannot be 0.", state=MESSAGE_ERROR)
         sys.exit(0)
     elif 0 < data_rows['last'] < data_rows['first']:
-        message("Please specify a valid number for the last data row.", MESSAGE_ERROR)
+        message("Please specify a valid number for the last data row.", state=MESSAGE_ERROR)
         sys.exit(0)
 
     return {
@@ -321,7 +321,7 @@ def unique(elements: list) -> list:
 # Initialize arguments
 parser = ArgumentParser()
 parser.add_argument('-q', '--quiet', help="Disable output of status messages", action='store_true')
-parser.add_argument('-u', '--unsafe', help="Skip CSV file check", action='store_true')
+parser.add_argument('-u', '--unsafe', help="Skip CSV file integrity check", action='store_true')
 args = parser.parse_args()
 
 # Execute main script
