@@ -1,18 +1,14 @@
 {
-  "name": "student-growth",
-  "version": "2.1.0",
+  "name": "@eliashaeussler/student-growth",
   "description": "Visualization about student growth in Germany",
-  "main": "gulpfile.js",
   "scripts": {
-    "build": "./node_modules/.bin/gulp --production && ./node_modules/.bin/gulp serve",
+    "build": "NODE_ENV=prod ./node_modules/.bin/gulp",
+    "dev": "./node_modules/.bin/gulp",
     "serve": "./node_modules/.bin/gulp serve",
-    "sources": "./node_modules/.bin/gulp --production",
-    "start": "./node_modules/.bin/gulp",
-    "test": "./node_modules/.bin/gulp --production",
-    "watch": "./node_modules/.bin/gulp serve && ./node_modules/.bin/gulp watch"
+    "test": "./node_modules/.bin/gulp lint"
   },
   "repository": "https://github.com/eliashaeussler/student-growth",
-  "author": "Elias Häußler <mail@elias-haeussler.de>",
+  "author": "Elias Häußler <elias@haeussler.dev>",
   "license": "MIT",
   "dependencies": {
     "d3-array": "^1.2.1",
@@ -30,31 +26,27 @@
     "spinkit": "^1.2.5"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "babel-loader": "^8.0.5",
     "browser-sync": "^2.24.4",
+    "glob-fs": "^0.1.7",
     "google-fonts-webpack-plugin": "^0.4.4",
-    "gulp": "gulpjs/gulp#4.0",
+    "gulp": "^4.0.1",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-clean-css": "^3.9.4",
     "gulp-if": "^2.0.2",
     "gulp-jshint": "^2.1.0",
-    "gulp-load-plugins": "^1.5.0",
     "gulp-sass": "^4.0.1",
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
+    "js-yaml": "^3.13.1",
     "jshint": "^2.9.5",
     "rimraf": "^2.6.2",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.0",
-    "webpack-stream": "^4.0.3",
-    "yargs": "^11.0.0"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
+    "webpack-stream": "^4.0.3"
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Elias Häußler <mail@elias-haeussler.de> (www.elias-haeussler.de).
+ * Copyright (c) 2019 Elias Häußler <elias@haeussler.dev>. All rights reserved.
  */
 
 const GoogleFontsPlugin = require('google-fonts-webpack-plugin');
@@ -10,11 +10,13 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: [
-          {
-            loader: 'babel-loader'
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
           }
-        ]
+        }
       }
     ]
   },

@@ -30,59 +30,57 @@ git clone https://github.com/eliashaeussler/student-growth.git
 cd student-growth
 ```
 
-After cloning install the Node dependencies:
+After cloning install the dependencies:
 
 ```bash
-yarn install
+yarn
 ```
-
-You can also use `npm install` in case you haven't installed `yarn`.
 
 
 ## Build the site
 
-In order to access the website which shows the visualization, you need to build the necessary project files:
+In order to access the website which shows the visualization you need to build the necessary project files:
 
 ```bash
 yarn run build
+yarn run serve
 ```
 
-You can alternatively use `npm run-script build` or `gulp --production && gulp server`.
-
 This compiles all necessary files and places them inside a `dist` folder. Files from this folder will be used as source
-for a web server which automatically starts running when you run one of the above commands.
+for a web server which automatically starts running when you run the above commands.
 
 If your Browser does not open by it's own, open it manually and navigate to the following page:
 
 <http://localhost:8000>
 
 If port `8000` is already in use, BrowserSync tries to use the next available port. You can see the active port in your
-command line after running one of the above commands.
+CLI after running the above commands.
 
 
 ### Development mode
 
 ```bash
-yarn run start
+yarn run dev
 ```
-
-(alternatively: `npm start` or simply `gulp`)
 
 The Development mode allows you to see changes on project files immediately in your browser since BrowserSync is watching
 for changes.
 
 
-### Other tasks
+### Available scripts
 
-| `npm` script | Gulp task | Description |
-| ---------- | --------- | ----------- |
-| `sources` | `default --production` | Build only the source files and does not start the server |
-| `serve` | `serve` | Run the server without creating any source files |
-| `watch` | `server watch` | Run the server without creating source files and watch for changes |
-| `test` | – | Test the project (does not start the server) |
+`npm` script | Gulp task               | Description
+------------ | ----------------------- | -----------
+`build`      | `NODE_ENV=prod default` | Build the project files for productional use
+`dev`        | `default`               | Build the dev project files and start server
+`serve`      | `serve`                 | Run the server without creating any source files
+`test`       | `lint`                  | Run linters to test project files
 
 All `npm` scripts need to be executed using `yarn run <command>` or `npm run-script <command>`.
 When running Gulp tasks, execute them using `gulp <command>`.
+
+You can provide the parameter `--force-download` to download latest data before running the project. Alternatively,
+it can be downloaded manually by running the Python script.
 
 
 
@@ -106,20 +104,20 @@ Download successful: src/data/data.csv
 
 The file `data/source.json` contains important information which are being used to parse the remote source file correctly.
 
-| Key | Description | Configuration |
-| --- | --- | --- |
-| `url` | File which contains information about the source files and their file formats | Valid URL with protocol as string |
-| `keys` | Position of keys (headlines) inside the source file (X and Y) | Object with keys `x` and `y` which contain arrays with numbers |
-| `data_rows` | Position of first and last data row | Object with keys `first` and `last` as numbers. `last` can be a row number (e.g. `293`) or the difference from the last available row (e.g. `-4`, more flexible)
+Key         | Description                                                                   | Configuration
+----------- | ----------------------------------------------------------------------------- | -------------
+`url`       | File which contains information about the source files and their file formats | Valid URL with protocol as string
+`keys`      | Position of keys (headlines) inside the source file (X and Y)                 | Object with keys `x` and `y` which contain arrays with numbers
+`data_rows` | Position of first and last data row                                           | Object with keys `first` and `last` as numbers. `last` can be a row number (e.g. `293`) or the difference from the last available row (e.g. `-4`, more flexible)
 
 ### Script parameters
 
 You can pass additional arguments when calling the download script. Run `python3 bin/download.py -h` to get an overview.
 
-| Parameter | Description |
-| --- | --- |
-| `-q`, `--quiet` | Suppresses status messages (error messages will still be displayed) |
-| `-u`, `--unsafe` | Skip integrity check of requested CSV file |
+Parameter        | Description
+---------------- | -----------
+`-q`, `--quiet`  | Suppresses status messages (error messages will still be displayed)
+`-u`, `--unsafe` | Skip integrity check of requested CSV file
 
 ### Installing certificates on macOS
 
