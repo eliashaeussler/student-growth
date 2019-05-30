@@ -1,7 +1,6 @@
-[![license](https://img.shields.io/github/license/eliashaeussler/student-growth.svg)](LICENSE.md)
-[![release](https://img.shields.io/github/release/eliashaeussler/student-growth.svg)](https://github.com/eliashaeussler/student-growth/releases/)
-[![Build Status](https://travis-ci.org/eliashaeussler/student-growth.svg)](https://travis-ci.org/eliashaeussler/student-growth)
-[![StyleCI](https://github.styleci.io/repos/132896060/shield?branch=master)](https://github.styleci.io/repos/132896060)
+[![license](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE.md)
+[![release](https://img.shields.io/badge/release-stable-blue.svg)](https://gitlab.elias-haeussler.de/eliashaeussler/student-growth/releases)
+[![pipeline status](https://img.shields.io/gitlab/pipeline/eliashaeussler/student-growth.svg?gitlab_url=https%3A%2F%2Fgitlab.elias-haeussler.de)](https://gitlab.elias-haeussler.de/eliashaeussler/student-growth/pipelines)
 
 
 # Student growth
