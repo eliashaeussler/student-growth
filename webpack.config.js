@@ -4,6 +4,7 @@
 
 const GoogleFontsPlugin = require('google-fonts-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const {FONTS} = require('./gulp/config');
 
 module.exports = {
   module: {
@@ -22,10 +23,7 @@ module.exports = {
   },
   plugins: [
     new GoogleFontsPlugin({
-      fonts: [
-        { family: "Inconsolata", variants: ["400"] },
-        { family: "Open Sans", variants: ["400", "italic", "700"] }
-      ],
+      fonts: FONTS,
       filename: "../css/fonts.css",
       path: "../fonts/"
     }),

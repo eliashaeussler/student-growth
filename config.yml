@@ -21,3 +21,9 @@ PATHS:
 
 SERVER:
   port: 8000
+
+FONTS:
+  - family: "Inconsolata"
+    variants: ["400"]
+  - family: "Open Sans"
+    variants: ["400", "italic", "700"]
