@@ -17,7 +17,7 @@ The project is based on the [D3 library](https://github.com/d3/d3) and developed
 
 ## Requirements
 
-* `yarn` or `npm` to install the required packages
+* `npm` to install the required packages
 * [Python 3.6](https://www.python.org/) in case you want to download the latest data
 
 
@@ -33,7 +33,7 @@ cd student-growth
 After cloning install the dependencies:
 
 ```bash
-yarn
+npm install
 ```
 
 
@@ -42,8 +42,8 @@ yarn
 In order to access the website which shows the visualization you need to build the necessary project files:
 
 ```bash
-yarn run build
-yarn run serve
+npm run build
+npm run serve
 ```
 
 This compiles all necessary files and places them inside a `dist` folder. Files from this folder will be used as source
@@ -60,7 +60,7 @@ CLI after running the above commands.
 ### Development mode
 
 ```bash
-yarn run dev
+npm run dev
 ```
 
 The Development mode allows you to see changes on project files immediately in your browser since BrowserSync is watching
@@ -76,7 +76,7 @@ for changes.
 `serve`      | `serve`                 | Run the server without creating any source files
 `test`       | `lint`                  | Run linters to test project files
 
-All `npm` scripts need to be executed using `yarn run <command>` or `npm run-script <command>`.
+All `npm` scripts need to be executed using `npm run <command>`.
 When running Gulp tasks, execute them using `gulp <command>`.
 
 You can provide the parameter `--force-download` to download latest data before running the project. Alternatively,
